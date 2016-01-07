@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -18,13 +19,15 @@ class Bill
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * 
+     * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=64)
      */
     protected $name;
 
     /**
      * @ORM\Column(type="decimal", scale=2)
+     * @Assert\NotBlank()
      */
     protected $price;
     

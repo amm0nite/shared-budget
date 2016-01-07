@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -19,11 +20,15 @@ class Person {
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3, max=32)
      */
     protected $name;
     
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3, max=64)
      */
     protected $password;
     
