@@ -45,6 +45,12 @@ class Budget {
      */
     protected $bills;
     
+    /**
+     * @ORM\OneToOne(targetEntity="Person")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     */
+    protected $person;
+    
     public function __construct() {
         $this->bills = new ArrayCollection();
     }

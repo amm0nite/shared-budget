@@ -17,26 +17,35 @@ class Invitation {
     protected $id;
     
     /**
-     * @ORM\Column(type="datetime", nullable=TRUE)
-     */
-    protected $created;
-    
-    /**
-     * @ORM\Column(type="datetime", nullable=TRUE)
-     */
-    protected $updated;
-    
-    /**
      * @ORM\OneToOne(targetEntity="Person")
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
-    protected $owner;
+    protected $person;
     
     /**
      * @ORM\OneToOne(targetEntity="Person")
      * @ORM\JoinColumn(name="target_id", referencedColumnName="id")
      */
     protected $target;
+    
+    /**
+     * @ORM\Column(type="boolean", nullable=TRUE)
+     */
+    protected $accepted;
+    
+    /**
+     * @ORM\Column(type="datetime", nullable=TRUE)
+     */
+    protected $created;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=TRUE)
+     */
+    protected $updated;
+    
+    public function __construct() {
+        $this->accepted = false;
+    }
     
     /**
      * @ORM\PrePersist
