@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="bill")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Bill
 {
@@ -31,6 +32,16 @@ class Bill
      * @ORM\Column(type="text")
      */
     protected $description;
+    
+    /**
+     * @ORM\Column(type="datetime", nullable=TRUE)
+     */
+    protected $created;
+    
+    /**
+     * @ORM\Column(type="datetime", nullable=TRUE)
+     */
+    protected $updated;
     
     /**
      * @ORM\ManyToOne(targetEntity="Person", inversedBy="bills")
@@ -85,5 +96,19 @@ class Bill
             'price' => $this->price,
             'description' => $this->description
         );
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreated() {
+        $this->created = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdated() {
+        $this->updated = new \DateTime();
     }
 }

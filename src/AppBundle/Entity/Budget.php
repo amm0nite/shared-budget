@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="budget")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Budget {
     /**
@@ -27,11 +28,35 @@ class Budget {
     protected $description;
     
     /**
+     * @ORM\Column(type="datetime", nullable=TRUE)
+     */
+    protected $created;
+    
+    /**
+     * @ORM\Column(type="datetime", nullable=TRUE)
+     */
+    protected $updated;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Bill", mappedBy="budget")
      */
     protected $bills;
     
     public function __construct() {
         $this->bills = new ArrayCollection();
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreated() {
+        $this->created = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdated() {
+        $this->updated = new \DateTime();
     }
 }
