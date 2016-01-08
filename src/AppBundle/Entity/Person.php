@@ -26,6 +26,14 @@ class Person {
     protected $name;
     
     /**
+     * @ORM\Column(type="string", length=128)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3, max=128)
+     * @Assert\Email(checkHost=true)
+     */
+    protected $email;
+    
+    /**
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank()
      * @Assert\Length(min=3, max=64)
@@ -49,6 +57,21 @@ class Person {
 
     public function __construct() {
         $this->bills = new ArrayCollection();
+    }
+    
+    /**
+     * @Assert\IsFalse(message = "That name is reserved")
+     */
+    public function isNameReserved() {
+        $reservedNames = array('admin', 'administrator', 'operator', 'root', 'mod', 'moderator');
+        return in_array($this->name, $reservedNames);
+    }
+    
+    /**
+     * @Assert\IsTrue(message = "The password cannot match your name")
+     */
+    public function isPasswordLegal() {
+        return $this->password != $this->name;
     }
     
     /**
