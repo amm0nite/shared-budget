@@ -17,6 +17,12 @@ class Invitation {
     protected $id;
     
     /**
+     * @ORM\OneToOne(targetEntity="Budget")
+     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
+     */
+    protected $budget;
+    
+    /**
      * @ORM\OneToOne(targetEntity="Person")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
