@@ -1,0 +1,23 @@
+{
+  "name": "shared-budget",
+  "homepage": "https://github.com/amm0nite/shared-budget",
+  "authors": [
+    "amm0nite"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pure": "~0.6.0"
+  }
+}
