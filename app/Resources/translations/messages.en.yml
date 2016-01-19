@@ -1,2 +1,4 @@
 menu.signup: "Sign up"
 menu.login: "Log in"
+menu.logout: "Log out"
+menu.home: "Home"

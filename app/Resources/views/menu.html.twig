@@ -1,6 +1,14 @@
 <div class="pure-menu pure-menu-horizontal">
     <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="{{ path('fos_user_security_login') }}" class="pure-menu-link">{% trans %}menu.login{% endtrans %}</a></li>
-        <li class="pure-menu-item"><a href="{{ path('fos_user_registration_register') }}" class="pure-menu-link">{% trans %}menu.signup{% endtrans %}</a></li>
+        <li class="pure-menu-item"><a href="{{ path('homepage') }}" class="pure-menu-link">{% trans %}menu.home{% endtrans %}</a></li>
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li class="pure-menu-item">{{ app.user.username }}</li>
+            <li class="pure-menu-item"><a href="{{ path('fos_user_security_logout') }}" class="pure-menu-link">{% trans %}menu.logout{% endtrans %}</a></li>
+        {% else %}
+            <li class="pure-menu-item"><a href="{{ path('fos_user_security_login') }}" class="pure-menu-link">{% trans %}menu.login{% endtrans %}</a></li>
+            <li class="pure-menu-item"><a href="{{ path('fos_user_registration_register') }}" class="pure-menu-link">{% trans %}menu.signup{% endtrans %}</a></li>
+        {% endif %}
     </ul>
 </div>
+
