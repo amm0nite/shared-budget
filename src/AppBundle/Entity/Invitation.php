@@ -21,9 +21,9 @@ class Invitation {
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
      */
     protected $budget;
-    
+
     /**
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="invitations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;

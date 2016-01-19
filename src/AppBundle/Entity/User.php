@@ -34,8 +34,14 @@ class User extends BaseUser {
      */
     protected $bills;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="user")
+     */
+    protected $invitations;
+
     public function __construct() {
         $this->bills = new ArrayCollection();
+        $this->invitations = new ArrayCollection();
     }
     
     /**
