@@ -4,41 +4,20 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="person")
+ * @ORM\Table(name="sb_user")
  * @ORM\HasLifecycleCallbacks()
  */
-class Person {
+class User extends BaseUser {
     /**
-     * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\Column(type="string", length=32)
-     * @Assert\NotBlank()
-     * @Assert\Length(min=3, max=32)
-     */
-    protected $name;
-    
-    /**
-     * @ORM\Column(type="string", length=128)
-     * @Assert\NotBlank()
-     * @Assert\Length(min=3, max=128)
-     * @Assert\Email(checkHost=true)
-     */
-    protected $email;
-    
-    /**
-     * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank()
-     * @Assert\Length(min=3, max=64)
-     */
-    protected $password;
     
     /**
      * @ORM\Column(type="datetime", nullable=TRUE)
@@ -51,7 +30,7 @@ class Person {
     protected $updated;
     
     /**
-     * @ORM\OneToMany(targetEntity="Bill", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Bill", mappedBy="user")
      */
     protected $bills;
 
@@ -62,16 +41,16 @@ class Person {
     /**
      * @Assert\IsFalse(message = "That name is reserved")
      */
-    public function isNameReserved() {
+    public function isUsernameReserved() {
         $reservedNames = array('admin', 'administrator', 'operator', 'root', 'mod', 'moderator');
-        return in_array($this->name, $reservedNames);
+        return in_array($this->username, $reservedNames);
     }
     
     /**
      * @Assert\IsTrue(message = "The password cannot match your name")
      */
     public function isPasswordLegal() {
-        return $this->password != $this->name;
+        return $this->password != $this->username;
     }
     
     /**

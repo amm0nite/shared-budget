@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="budget")
+ * @ORM\Table(name="sb_budget")
  * @ORM\HasLifecycleCallbacks()
  */
 class Budget {
@@ -46,10 +46,10 @@ class Budget {
     protected $bills;
     
     /**
-     * @ORM\OneToOne(targetEntity="Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $person;
+    protected $user;
     
     public function __construct() {
         $this->bills = new ArrayCollection();

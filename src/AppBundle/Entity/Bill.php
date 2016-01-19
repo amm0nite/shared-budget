@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="bill")
+ * @ORM\Table(name="sb_bill")
  * @ORM\HasLifecycleCallbacks()
  */
 class Bill
@@ -47,10 +47,10 @@ class Bill
     protected $updated;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Person", inversedBy="bills")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="bills")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $person;
+    protected $user;
     
     /**
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="bills")

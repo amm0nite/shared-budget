@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="invitation")
+ * @ORM\Table(name="sb_invitation")
  * @ORM\HasLifecycleCallbacks()
  */
 class Invitation {
@@ -23,13 +23,13 @@ class Invitation {
     protected $budget;
     
     /**
-     * @ORM\OneToOne(targetEntity="Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $person;
+    protected $user;
     
     /**
-     * @ORM\OneToOne(targetEntity="Person")
+     * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="target_id", referencedColumnName="id")
      */
     protected $target;
