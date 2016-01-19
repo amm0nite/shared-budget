@@ -3,13 +3,11 @@
     Author     : pierre
 */
 body {
-    width:1024px;
-    margin:auto;
-    padding-top:20px;
+
 }
 #sb-title {
     
 }
 #sb-content {
-    
+    padding:20px;
 }

@@ -18,6 +18,6 @@
     "tests"
   ],
   "dependencies": {
-    "pure": "~0.6.0"
+    "bootstrap": "~3.3.6"
   }
 }
