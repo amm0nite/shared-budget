@@ -40,6 +40,7 @@ class User extends BaseUser {
     protected $invitations;
 
     public function __construct() {
+        parent::__construct();
         $this->bills = new ArrayCollection();
         $this->invitations = new ArrayCollection();
     }
