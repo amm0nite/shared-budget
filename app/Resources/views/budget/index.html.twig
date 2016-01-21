@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('sb_budget_new') }}" class="btn btn-default">{% trans %}budget.new{% endtrans %}</a>
+        </div>
+    </div>
+
+    <div style="height:20px;"></div>
+
+    {% if budgets|length > 0 %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>{% trans %}budget.name{% endtrans %}</th>
+                    <th>{% trans %}budget.bills{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for budget in budgets %}
+                    <tr>
+                        <td>{{ budget.name }}</td>
+                        <td>{{ budget.bills|length }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info" role="alert">{% trans %}budget.none{% endtrans %}</div>
+    {% endif %}
+
+{% endblock body %}

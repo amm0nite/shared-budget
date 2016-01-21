@@ -37,12 +37,24 @@ class User extends BaseUser {
     /**
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="user")
      */
-    protected $invitations;
+    protected $invitationsSent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="target")
+     */
+    protected $invitationsReceived;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Budget", mappedBy="user")
+     */
+    protected $budgets;
 
     public function __construct() {
         parent::__construct();
         $this->bills = new ArrayCollection();
-        $this->invitations = new ArrayCollection();
+        $this->invitationsSent = new ArrayCollection();
+        $this->invitationsReceived = new ArrayCollection();
+        $this->budgets = new ArrayCollection();
     }
     
     /**
@@ -76,5 +88,21 @@ class User extends BaseUser {
 
     public function getCreated() {
         return $this->created;
+    }
+
+    public function getBudgets() {
+        $result = array();
+
+        // owned
+        foreach ($this->budgets as $b) {
+            $result[] = $b;
+        }
+
+        // invited
+        foreach ($this->invitationsReceived as $i) {
+            $result[] = $i->budget;
+        }
+
+        return $result;
     }
 }

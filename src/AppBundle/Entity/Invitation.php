@@ -15,21 +15,21 @@ class Invitation {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
-     * @ORM\OneToOne(targetEntity="Budget")
+     * @ORM\ManyToOne(targetEntity="Budget", inversedBy="invitations")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
      */
     protected $budget;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="invitations")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="invitationsSent")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
-    
+
     /**
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="invitationsReceived")
      * @ORM\JoinColumn(name="target_id", referencedColumnName="id")
      */
     protected $target;

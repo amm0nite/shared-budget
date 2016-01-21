@@ -44,15 +44,21 @@ class Budget {
      * @ORM\OneToMany(targetEntity="Bill", mappedBy="budget")
      */
     protected $bills;
-    
+
     /**
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="budget")
+     */
+    protected $invitations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="budgets")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
     
     public function __construct() {
         $this->bills = new ArrayCollection();
+        $this->invitations = new ArrayCollection();
     }
     
     /**
@@ -67,5 +73,21 @@ class Budget {
      */
     public function setUpdated() {
         $this->updated = new \DateTime();
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function setDescription($description) {
+        $this->description = $description;
     }
 }
