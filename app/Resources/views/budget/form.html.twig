@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a href="{{ path('sb_budgets') }}">{% trans %}budget.returntolist{% endtrans %}</a>
+        </div>
+    </div>
+
+{% endblock body %}

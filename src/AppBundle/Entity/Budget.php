@@ -75,6 +75,10 @@ class Budget {
         $this->updated = new \DateTime();
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
     public function getName() {
         return $this->name;
     }
@@ -89,5 +93,23 @@ class Budget {
 
     public function setDescription($description) {
         $this->description = $description;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user) {
+        $this->user = $user;
+    }
+
+    public function getBills() {
+        return $this->bills;
     }
 }

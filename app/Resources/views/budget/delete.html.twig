@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <p>{% trans with {'%name%': budget.name } %}budget.confirmdelete{% endtrans %}</p>
+    <a href="{{ path('sb_budget_delete', {'id': budget.id, 'confirm':'true'}) }}" class="btn btn-danger">{% trans %}budget.delete{% endtrans %}</a>
+    <a href="{{ path('sb_budgets') }}" class="btn btn-default">{% trans %}budget.returntolist{% endtrans %}</a>
+
+{% endblock body %}

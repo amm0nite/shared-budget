@@ -1,0 +1,14 @@
+{% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            {% if type == 'notice' %}
+                {% set class = 'info' %}
+            {% elseif type == 'error' %}
+                {% set class = 'danger' %}
+            {% else %}
+                {% set class = type %}
+            {% endif %}
+            <div class="alert alert-{{ class }}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
