@@ -1,0 +1,16 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<table class="table table-striped">
+    <tbody>
+        <tr><td>{{ 'profile.show.username'|trans }}</td><td>{{ user.username }}</td></tr>
+        <tr><td>{{ 'profile.show.email'|trans }}</td><td>{{ user.email }}</td></tr>
+        <tr><td>{{ 'profile.registration'|trans({}, 'messages') }}</td><td>{{ user.created|date("datetime"|trans({}, 'messages')) }}</td></tr>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-md-12">
+        <a href="{{ path('fos_user_change_password') }}" class="btn btn-default">{{ 'profile.changepassword'|trans({}, 'messages') }}</a>
+        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default">{{ 'profile.edit'|trans({}, 'messages') }}</a>
+    </div>
+</div>

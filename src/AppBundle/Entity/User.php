@@ -73,4 +73,8 @@ class User extends BaseUser {
     public function setUpdated() {
         $this->updated = new \DateTime();
     }
+
+    public function getCreated() {
+        return $this->created;
+    }
 }
