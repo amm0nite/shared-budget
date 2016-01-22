@@ -169,13 +169,22 @@ class Bill
         return $this->guests;
     }
 
+    /**
+     * @return array
+     */
     public function toArray() {
-        return Array(
+        $result = array(
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
-            'description' => $this->description
+            'description' => $this->description,
+            'payer' => $this->getPayer()->toArray(),
+            'guests' => array()
         );
+        foreach ($this->getGuests() as $guest) {
+            $result['guests'][] = $guest->toArray();
+        }
+        return $result;
     }
     
     /**
