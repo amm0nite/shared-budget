@@ -1,14 +1,18 @@
 datetime: "H:i m/d/Y"
+
 menu.signup: "Sign up"
 menu.login: "Log in"
 menu.logout: "Log out"
 menu.home: "Home"
 menu.budgets: "Budgets"
 menu.activity: "Activity"
+
 login.resetpassword: "Reset my password"
+
 profile.changepassword: "Change password"
 profile.edit: "Edit profile"
 profile.registration: "Registration"
+
 budget.new: "Add a new budget"
 budget.none: "You do not have any budget."
 budget.name: "Name"
@@ -25,6 +29,7 @@ budget.createsuccessful: "Budget successfully created"
 budget.editsuccessful: "Budget successfully edited"
 budget.deletesuccessful: "Budget successfully deleted"
 budget.confirmdelete: "Are you sure you want to delete <strong>%name%</strong> ?"
+
 bill.new: "Add a new bill"
 bill.none: "You do not have any bill."
 bill.createsuccessful: "Bill successfully created"
@@ -39,3 +44,11 @@ bill.edit: "Edit"
 bill.delete: "Delete"
 bill.notfound: "Bill not found"
 bill.accessdenied: "Access denied"
+
+user.unknownusername: "This is not a valid username"
+
+invitation.new: "Invite a new user"
+invitation.createsuccessful: "Invitation successfully created"
+invitation.returntobudget: "Return to the budget"
+invitation.target: "Username"
+invitation.send: "Send"

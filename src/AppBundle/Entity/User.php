@@ -127,4 +127,14 @@ class User extends BaseUser {
         }
         return false;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        return array(
+            'id' => $this->id,
+            'username' => $this->username
+        );
+    }
 }

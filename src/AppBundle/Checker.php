@@ -14,8 +14,21 @@ use Symfony\Component\Translation\Translator;
 use AppBundle\Entity\User;
 
 class Checker {
+    /**
+     * @var Registry
+     */
     private $registry;
 
+    /**
+     * @var Translator
+     */
+    private $translator;
+
+    /**
+     * Checker constructor.
+     * @param Registry $registry
+     * @param Translator $translator
+     */
     public function __construct(Registry $registry, Translator $translator) {
         $this->registry = $registry;
         $this->translator = $translator;

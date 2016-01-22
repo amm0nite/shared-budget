@@ -19,6 +19,7 @@ class Invitation {
     /**
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="invitations")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
+     * @var Budget $budget
      */
     protected $budget;
 
@@ -60,6 +61,48 @@ class Invitation {
     public function getAccepted() {
         return $this->accepted;
     }
+
+    /**
+     * @param Budget $budget
+     */
+    public function setBudget(Budget $budget) {
+        $this->budget = $budget;
+    }
+
+    /**
+     * @return Budget
+     */
+    public function getBudget() {
+        return $this->budget;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user) {
+        $this->user = $user;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
+    /**
+     * @param User $target
+     */
+    public function setTarget(User $target) {
+        $this->target = $target;
+    }
+
+    /**
+     * @return User
+     */
+    public function getTarget() {
+        return $this->target;
+    }
     
     /**
      * @ORM\PrePersist
@@ -73,5 +116,17 @@ class Invitation {
      */
     public function setUpdated() {
         $this->updated = new \DateTime();
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray() {
+        return array(
+            'id' => $this->id,
+            'user' => $this->getUser()->toArray(),
+            'target' => $this->getTarget()->toArray(),
+            'budget' => $this->getBudget()->toArray()
+        );
     }
 }

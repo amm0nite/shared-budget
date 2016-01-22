@@ -10,3 +10,9 @@ services:
     app.checker:
         class: AppBundle\Checker
         arguments: ['@doctrine', '@translator.default']
+
+    app.form.type.invitation:
+        class: AppBundle\Form\Type\InvitationType
+        arguments: ['@doctrine', '@translator.default']
+        tags:
+            - { name: form.type }
