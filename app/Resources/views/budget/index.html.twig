@@ -22,7 +22,7 @@
             <tbody>
                 {% for budget in budgets %}
                     <tr>
-                        <td>{{ budget.name }}</td>
+                        <td><span data-toggle="tooltip" data-placement="right" title="{{ budget.description }}">{{ budget.name }}</span></td>
                         <td>{{ budget.bills|length }}</td>
                         <td>
                             {% if app.user.id == budget.user.id %}
@@ -39,3 +39,10 @@
     {% endif %}
 
 {% endblock body %}
+
+{% block js %}
+    (function() {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="tooltip"]').css('cursor', 'help');
+    })();
+{% endblock js %}
