@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="sb_invitation")
+ * @ORM\Table(name="sb_invitation", uniqueConstraints={@ORM\UniqueConstraint(name="unq_budget_user", columns={"budget_id", "user_id"})})
  * @ORM\HasLifecycleCallbacks()
  */
 class Invitation {
