@@ -91,7 +91,35 @@ class Bill
     public function getDescription() {
         return $this->description;
     }
-    
+
+    /**
+     * @param Budget $budget
+     */
+    public function setBudget(Budget $budget) {
+        $this->budget = $budget;
+    }
+
+    /**
+     * @return Budget
+     */
+    public function getBudget() {
+        return $this->budget;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user) {
+        $this->user = $user;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
     public function toArray() {
         return Array(
             'id' => $this->id,

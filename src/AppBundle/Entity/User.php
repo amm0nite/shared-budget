@@ -94,6 +94,9 @@ class User extends BaseUser {
         return $this->created;
     }
 
+    /**
+     * @return Budget[]
+     */
     public function getBudgets() {
         $result = array();
 
@@ -105,10 +108,23 @@ class User extends BaseUser {
         // invited
         foreach ($this->invitationsReceived as $i) {
             if ($i->getAccepted()) {
-                $result[] = $i->budget;
+                $result[] = $i->getBudget();
             }
         }
 
         return $result;
+    }
+
+    /**
+     * @param Budget $budget
+     * @return bool
+     */
+    public function isInvited(Budget $budget) {
+        foreach ($this->invitationsReceived as $i) {
+            if ($i->getAccepted() && $i->getBudget()->getId() == $budget->getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

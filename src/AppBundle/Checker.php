@@ -26,7 +26,7 @@ class Checker {
      * @param $id
      * @return Entity\Budget
      */
-    public function budget(User $user, $id) {
+    public function budget(User $user, $id, $requireOwnership = true) {
         $repo = $this->registry->getRepository('AppBundle:Budget');
         $budget = $repo->find($id);
 
@@ -35,7 +35,12 @@ class Checker {
         }
 
         if ($budget->getUser()->getId() != $user->getId()) {
-            throw new AccessDeniedException($this->translator->trans('budget.accessdenied'));
+            if ($requireOwnership) {
+                throw new AccessDeniedException($this->translator->trans('budget.accessdenied'));
+            }
+            if (!$user->isInvited($budget)) {
+                throw new AccessDeniedException($this->translator->trans('budget.accessdenied'));
+            }
         }
 
         return $budget;

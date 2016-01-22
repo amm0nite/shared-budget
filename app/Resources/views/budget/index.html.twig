@@ -22,14 +22,9 @@
             <tbody>
                 {% for budget in budgets %}
                     <tr>
-                        <td><span data-toggle="tooltip" data-placement="right" title="{{ budget.description }}">{{ budget.name }}</span></td>
+                        <td><a href="{{ path('sb_budget_show', { 'id': budget.id }) }}" data-toggle="tooltip" data-placement="right" title="{{ budget.description }}">{{ budget.name }}</a></td>
                         <td>{{ budget.bills|length }}</td>
-                        <td>
-                            {% if app.user.id == budget.user.id %}
-                                <a href="{{ path('sb_budget_edit', { 'id': budget.id }) }}" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i> {% trans %}budget.edit{% endtrans %}</a>
-                                <a href="{{ path('sb_budget_delete', { 'id': budget.id }) }}" class="btn btn-default btn-sm"><i class="fa fa-trash"></i> {% trans %}budget.delete{% endtrans %}</a>
-                            {% endif %}
-                        </td>
+                        <td>{{ include('budget/buttons.html.twig', { 'budget': budget }) }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -43,6 +38,6 @@
 {% block js %}
     (function() {
         $('[data-toggle="tooltip"]').tooltip();
-        $('[data-toggle="tooltip"]').css('cursor', 'help');
+        $('[data-toggle="tooltip"]').css('cursor', 'pointer');
     })();
 {% endblock js %}

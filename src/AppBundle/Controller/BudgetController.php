@@ -95,4 +95,13 @@ class BudgetController extends Controller {
             return $this->render('budget/delete.html.twig', array('budget' => $budget));
         }
     }
+
+    /**
+     * @Route("/budget/{id}", name="sb_budget_show", requirements={"id": "\d+"})
+     */
+    public function showAction($id) {
+        $budget = $this->get('app.checker')->budget($this->getUser(), $id, false);
+        $bills = $budget->getBills();
+        return $this->render('budget/show.html.twig', array('budget' => $budget,'bills' => $bills));
+    }
 }

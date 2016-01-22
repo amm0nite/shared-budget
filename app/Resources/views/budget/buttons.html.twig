@@ -1,0 +1,4 @@
+{% if app.user.id == budget.user.id %}
+    <a href="{{ path('sb_budget_edit', { 'id': budget.id }) }}" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i> {% trans %}budget.edit{% endtrans %}</a>
+    <a href="{{ path('sb_budget_delete', { 'id': budget.id }) }}" class="btn btn-default btn-sm"><i class="fa fa-trash"></i> {% trans %}budget.delete{% endtrans %}</a>
+{% endif %}

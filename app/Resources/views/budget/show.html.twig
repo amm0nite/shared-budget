@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ budget.name }}</h2>
+            <p>{{ budget.description }}</p>
+        </div>
+        <div class="col-md-4 text-right">
+            {{ include('budget/buttons.html.twig', { 'budget': budget }) }}
+        </div>
+    </div>
+
+    {{ include('bill/index.html.twig', { 'budget': budget, 'bills': bills }) }}
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}
