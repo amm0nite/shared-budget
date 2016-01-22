@@ -27,7 +27,11 @@ class InvitationController extends Controller {
             $action = new Action();
             $action->setTemplate('invitation_new');
             $action->setBudget($budget);
-            $action->setData($invitation->toArray());
+            $action->setData(array(
+                'budget' => $invitation->getBudget()->getId(),
+                'user' => $invitation->getUser()->getId(),
+                'target' => $invitation->getTarget()->getId()
+            ));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);
@@ -39,5 +43,37 @@ class InvitationController extends Controller {
         }
 
         return $this->render('invitation/form.html.twig', array('form' => $form->createView(), 'budget' => $budget));
+    }
+
+    /**
+     * @Route("/invitation/{id}/{action}", name="sb_invitation_update", requirements={"id": "\d+", "action": "cancel|renew"})
+     */
+    public function updateAction($id, $action) {
+        $invitation = $this->get('app.checker')->invitation($this->getUser(), $id);
+        $budget = $invitation->getBudget();
+        $before = $invitation->getStatus();
+
+        $actions = array(
+            'cancel' => 'canceled',
+            'renew' => 'pending'
+        );
+        $invitation->setStatus($actions[$action]);
+
+        $action = new Action();
+        $action->setTemplate('invitation_cancel');
+        $action->setBudget($budget);
+        $action->setData(array(
+            'id' => $invitation->getId(),
+            'before' => $before,
+            'after' => $invitation->getStatus()
+        ));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($invitation);
+        $em->persist($action);
+        $em->flush();
+
+        $this->addFlash('notice', $this->get('translator')->trans('invitation.updatesuccessful'));
+        return $this->redirectToRoute('sb_budget_show', array('id' => $budget->getId()));
     }
 }

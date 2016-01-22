@@ -1,0 +1,31 @@
+{% if invitations|length > 0 %}
+    <table class="table table-striped">
+        <caption>{% trans %}invitation.caption{% endtrans %}</caption>
+        <thead>
+        <tr>
+            <th>{% trans %}invitation.target{% endtrans %}</th>
+            <th>{% trans %}invitation.status{% endtrans %}</th>
+            <th>{% trans %}invitation.balance{% endtrans %}</th>
+            <th>{% trans %}invitation.actions{% endtrans %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for invitation in invitations %}
+            <tr>
+                <td>{{ invitation.target.username }}</a></td>
+                <td>{{ "invitation.status.#{invitation.status}"|trans }}</td>
+                <td>{{ invitation.balance }}</td>
+                <td>
+                    {% if invitation.status not in ['canceled','declined'] %}
+                        <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'cancel' }) }}" class="btn btn-default btn-sm"><i class="fa fa-ban"></i> {% trans %}invitation.cancel{% endtrans %}</a>
+                    {% else %}
+                        <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'renew' }) }}" class="btn btn-default btn-sm"><i class="fa fa-repeat"></i> {% trans %}invitation.renew{% endtrans %}</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-info" role="alert">{% trans %}invitation.none{% endtrans %}</div>
+{% endif %}

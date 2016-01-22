@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -34,11 +35,13 @@ class Invitation {
      * @ORM\JoinColumn(name="target_id", referencedColumnName="id")
      */
     protected $target;
-    
+
     /**
-     * @ORM\Column(type="boolean", nullable=TRUE)
+     * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3, max=64)
      */
-    protected $accepted;
+    protected $status;
     
     /**
      * @ORM\Column(type="datetime", nullable=TRUE)
@@ -51,15 +54,19 @@ class Invitation {
     protected $updated;
     
     public function __construct() {
-        $this->accepted = false;
+        $this->status = 'pending';
     }
 
-    public function setAccepted($accepted) {
-        $this->accepted = (bool) $accepted;
+    public function getId() {
+        return $this->id;
     }
 
-    public function getAccepted() {
-        return $this->accepted;
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+    public function getStatus() {
+        return $this->status;
     }
 
     /**
@@ -116,6 +123,10 @@ class Invitation {
      */
     public function setUpdated() {
         $this->updated = new \DateTime();
+    }
+
+    public function getBalance() {
+        return "todo";
     }
 
     /**

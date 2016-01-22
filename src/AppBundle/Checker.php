@@ -89,4 +89,29 @@ class Checker {
 
         return $bill;
     }
+
+    public function invitation(User $user, $id, $requireOwnership = true) {
+        $repo = $this->registry->getRepository('AppBundle:Invitation');
+        $invitation = $repo->find($id);
+
+        if (!$invitation) {
+            throw new NotFoundHttpException($this->translator->trans('invitation.notfound'));
+        }
+
+        $budget = $invitation->getBudget();
+        if (!$budget) {
+            throw new NotFoundHttpException($this->translator->trans('budget.notfound'));
+        }
+
+        if ($invitation->getUser()->getId() != $user->getId()) {
+            if ($requireOwnership) {
+                throw new AccessDeniedException($this->translator->trans('invitation.accessdenied'));
+            }
+            if (!$user->isInvited($budget)) {
+                throw new AccessDeniedException($this->translator->trans('invitation.accessdenied'));
+            }
+        }
+
+        return $invitation;
+    }
 }

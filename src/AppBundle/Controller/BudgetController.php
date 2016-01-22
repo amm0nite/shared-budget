@@ -102,6 +102,6 @@ class BudgetController extends Controller {
     public function showAction($id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id, false);
         $bills = $budget->getBills();
-        return $this->render('budget/show.html.twig', array('budget' => $budget,'bills' => $bills));
+        return $this->render('budget/show.html.twig', array('budget' => $budget));
     }
 }

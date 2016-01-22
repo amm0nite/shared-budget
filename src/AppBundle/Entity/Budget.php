@@ -115,10 +115,23 @@ class Budget {
         $this->user = $user;
     }
 
+    /**
+     * @return Bill[]
+     */
     public function getBills() {
         return $this->bills;
     }
 
+    /**
+     * @return Invitation[]
+     */
+    public function getInvitations() {
+        return $this->invitations;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray() {
         return array(
             'name' => $this->getName(),
