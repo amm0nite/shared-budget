@@ -58,7 +58,14 @@ class Bill
      * @ORM\JoinColumn(name="payer_id", referencedColumnName="id")
      */
     protected $payer;
-    
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="paidBills")
+     * @ORM\JoinTable(name="sb_guest")
+     */
+    protected $guests;
+
+
     /**
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="bills")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
@@ -66,16 +73,10 @@ class Bill
     protected $budget;
 
     /**
-     * @ORM\OneToMany(targetEntity="Payee", mappedBy="bill")
-     * @var Payee[]
-     */
-    protected $payees;
-
-    /**
      * Bill constructor.
      */
     public function  __construct() {
-        $this->payees = new ArrayCollection();
+        $this->guests = new ArrayCollection();
     }
 
     public function getId() {
@@ -138,6 +139,34 @@ class Bill
      */
     public function getUser() {
         return $this->user;
+    }
+
+    /**
+     * @param User $payer
+     */
+    public function setPayer(User $payer) {
+        $this->payer = $payer;
+    }
+
+    /**
+     * @return User
+     */
+    public function getPayer() {
+        return $this->payer;
+    }
+
+    /**
+     * @param User[]|ArrayCollection $guests
+     */
+    public function setGuests(ArrayCollection $guests) {
+        $this->guests = $guests;
+    }
+
+    /**
+     * @return User[]|ArrayCollection
+     */
+    public function getGuests() {
+        return $this->guests;
     }
 
     public function toArray() {

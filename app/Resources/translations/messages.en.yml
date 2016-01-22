@@ -46,6 +46,8 @@ bill.delete: "Delete"
 bill.notfound: "Bill not found"
 bill.accessdenied: "Access denied"
 bill.caption: "Bills"
+bill.payer: "Payer"
+bill.guests: "For"
 
 user.unknownusername: "This is not a valid username"
 

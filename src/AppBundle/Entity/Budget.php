@@ -130,6 +130,18 @@ class Budget {
     }
 
     /**
+     * @return User[]|ArrayCollection
+     */
+    public function getMembers() {
+        $members = new ArrayCollection();
+        $members->add($this->getUser());
+        foreach ($this->getInvitations() as $invitation) {
+            $members->add($invitation->getTarget());
+        }
+        return $members;
+    }
+
+    /**
      * @return array
      */
     public function toArray() {

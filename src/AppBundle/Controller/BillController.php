@@ -23,8 +23,12 @@ class BillController extends Controller {
 
         $bill = new Bill();
         $bill->setBudget($budget);
+        $members = $budget->getMembers();
+        $bill->setGuests($members);
 
-        $form = $this->createForm(BillType::class, $bill);
+        $form = $this->createForm(BillType::class, $bill, array(
+            'members' => $members
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -55,7 +59,9 @@ class BillController extends Controller {
         $budget = $bill->getBudget();
         $before = $bill->toArray();
 
-        $form = $this->createForm(BillType::class, $bill);
+        $form = $this->createForm(BillType::class, $bill, array(
+            'members' => $budget->getMembers()
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

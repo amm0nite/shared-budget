@@ -42,10 +42,9 @@ class User extends BaseUser {
     protected $payments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Payee", mappedBy="user")
-     * @var Payee[]
+     * @ORM\ManyToMany(targetEntity="Bill", mappedBy="guests")
      */
-    protected $payees;
+    protected $paidBills;
 
     /**
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="user")
@@ -72,7 +71,7 @@ class User extends BaseUser {
         parent::__construct();
         $this->bills = new ArrayCollection();
         $this->payments = new ArrayCollection();
-        $this->payees = new ArrayCollection();
+        $this->paidBills = new ArrayCollection();
         $this->invitationsSent = new ArrayCollection();
         $this->invitationsReceived = new ArrayCollection();
         $this->budgets = new ArrayCollection();
