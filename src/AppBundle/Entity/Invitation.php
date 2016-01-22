@@ -3,11 +3,13 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="sb_invitation", uniqueConstraints={@ORM\UniqueConstraint(name="unq_budget_user", columns={"budget_id", "user_id"})})
+ * @ORM\Table(name="sb_invitation", uniqueConstraints={@ORM\UniqueConstraint(name="unq_budget_user", columns={"budget_id", "target_id"})})
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"budget","target"}, message="This user is already invited")
  */
 class Invitation {
     /**
