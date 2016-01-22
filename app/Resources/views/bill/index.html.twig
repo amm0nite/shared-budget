@@ -12,6 +12,7 @@
         <tr>
             <th>{% trans %}bill.name{% endtrans %}</th>
             <th>{% trans %}bill.price{% endtrans %}</th>
+            <th>{% trans %}bill.actions{% endtrans %}</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
             <tr>
                 <td>{{ bill.name }}</a></td>
                 <td>{{ bill.price }}</td>
+                <td>{{ include('bill/buttons.html.twig', { 'bill': bill }) }}</td>
             </tr>
         {% endfor %}
         </tbody>

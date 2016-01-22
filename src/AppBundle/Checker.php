@@ -45,4 +45,35 @@ class Checker {
 
         return $budget;
     }
+
+    /**
+     * @param User $user
+     * @param $id
+     * @param bool $requireOwnership
+     * @return Entity\Bill
+     */
+    public function bill(User $user, $id, $requireOwnership = true) {
+        $repo = $this->registry->getRepository('AppBundle:Bill');
+        $bill = $repo->find($id);
+
+        if (!$bill) {
+            throw new NotFoundHttpException($this->translator->trans('bill.notfound'));
+        }
+
+        $budget = $bill->getBudget();
+        if (!$budget) {
+            throw new NotFoundHttpException($this->translator->trans('budget.notfound'));
+        }
+
+        if ($bill->getUser()->getId() != $user->getId()) {
+            if ($requireOwnership) {
+                throw new AccessDeniedException($this->translator->trans('bill.accessdenied'));
+            }
+            if (!$user->isInvited($budget)) {
+                throw new AccessDeniedException($this->translator->trans('bill.accessdenied'));
+            }
+        }
+
+        return $bill;
+    }
 }
