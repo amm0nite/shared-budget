@@ -31,21 +31,25 @@ class User extends BaseUser {
     
     /**
      * @ORM\OneToMany(targetEntity="Bill", mappedBy="user")
+     * @var Bill[]
      */
     protected $bills;
 
     /**
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="user")
+     * @var Invitation[]
      */
     protected $invitationsSent;
 
     /**
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="target")
+     * @var Invitation[]
      */
     protected $invitationsReceived;
 
     /**
      * @ORM\OneToMany(targetEntity="Budget", mappedBy="user")
+     * @var Budget[]
      */
     protected $budgets;
 
@@ -100,7 +104,9 @@ class User extends BaseUser {
 
         // invited
         foreach ($this->invitationsReceived as $i) {
-            $result[] = $i->budget;
+            if ($i->getAccepted()) {
+                $result[] = $i->budget;
+            }
         }
 
         return $result;

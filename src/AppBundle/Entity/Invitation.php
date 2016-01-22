@@ -52,6 +52,14 @@ class Invitation {
     public function __construct() {
         $this->accepted = false;
     }
+
+    public function setAccepted($accepted) {
+        $this->accepted = (bool) $accepted;
+    }
+
+    public function getAccepted() {
+        return $this->accepted;
+    }
     
     /**
      * @ORM\PrePersist
