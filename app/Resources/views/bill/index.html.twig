@@ -4,6 +4,7 @@
         <thead>
         <tr>
             <th>{% trans %}bill.name{% endtrans %}</th>
+            <th>{% trans %}bill.payer{% endtrans %}</th>
             <th>{% trans %}bill.price{% endtrans %}</th>
             <th>{% trans %}bill.actions{% endtrans %}</th>
         </tr>
@@ -11,7 +12,8 @@
         <tbody>
         {% for bill in bills %}
             <tr>
-                <td>{{ bill.name }}</a></td>
+                <td>{{ bill.name }}</td>
+                <td>{{ bill.payer.username }}</td>
                 <td>{{ bill.price }}</td>
                 <td>{{ include('bill/buttons.html.twig', { 'bill': bill }) }}</td>
             </tr>
