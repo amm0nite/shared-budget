@@ -51,6 +51,11 @@ class Budget {
     protected $invitations;
 
     /**
+     * @ORM\OneToMany(targetEntity="Action", mappedBy="budget")
+     */
+    protected $actions;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="budgets")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -59,6 +64,7 @@ class Budget {
     public function __construct() {
         $this->bills = new ArrayCollection();
         $this->invitations = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
     
     /**
@@ -111,5 +117,12 @@ class Budget {
 
     public function getBills() {
         return $this->bills;
+    }
+
+    public function toArray() {
+        return array(
+            'name' => $this->getName(),
+            'description' => $this->getDescription()
+        );
     }
 }

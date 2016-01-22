@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\Type\BudgetType;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Action;
 
 class BudgetController extends Controller {
     /**
@@ -50,13 +51,23 @@ class BudgetController extends Controller {
      */
     public function editAction(Request $request, $id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id);
+        $before = $budget->toArray();
 
         $form = $this->createForm(BudgetType::class, $budget);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $action = new Action();
+            $action->setTemplate('budget_edit');
+            $action->setBudget($budget);
+            $action->setData(array(
+                'before' => $before,
+                'after' => $budget->toArray()
+            ));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($budget);
+            $em->persist($action);
             $em->flush();
 
             $this->addFlash('notice', $this->get('translator')->trans('budget.editsuccessful'));

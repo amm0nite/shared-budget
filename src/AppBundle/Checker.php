@@ -24,7 +24,7 @@ class Checker {
     /**
      * @param User $user
      * @param $id
-     * @return Entity\Budget|object
+     * @return Entity\Budget
      */
     public function budget(User $user, $id) {
         $repo = $this->registry->getRepository('AppBundle:Budget');
