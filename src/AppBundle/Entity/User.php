@@ -36,6 +36,18 @@ class User extends BaseUser {
     protected $bills;
 
     /**
+     * @ORM\OneToMany(targetEntity="Bill", mappedBy="payer")
+     * @var Bill[]
+     */
+    protected $payments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Payee", mappedBy="user")
+     * @var Payee[]
+     */
+    protected $payees;
+
+    /**
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="user")
      * @var Invitation[]
      */
@@ -53,9 +65,14 @@ class User extends BaseUser {
      */
     protected $budgets;
 
+    /**
+     * User constructor.
+     */
     public function __construct() {
         parent::__construct();
         $this->bills = new ArrayCollection();
+        $this->payments = new ArrayCollection();
+        $this->payees = new ArrayCollection();
         $this->invitationsSent = new ArrayCollection();
         $this->invitationsReceived = new ArrayCollection();
         $this->budgets = new ArrayCollection();

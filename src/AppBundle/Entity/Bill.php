@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -51,12 +52,31 @@ class Bill
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="payments")
+     * @ORM\JoinColumn(name="payer_id", referencedColumnName="id")
+     */
+    protected $payer;
     
     /**
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="bills")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
      */
     protected $budget;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Payee", mappedBy="bill")
+     * @var Payee[]
+     */
+    protected $payees;
+
+    /**
+     * Bill constructor.
+     */
+    public function  __construct() {
+        $this->payees = new ArrayCollection();
+    }
 
     public function getId() {
         return $this->id;
