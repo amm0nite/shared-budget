@@ -123,7 +123,7 @@ class User extends BaseUser {
 
         // invited
         foreach ($this->invitationsReceived as $i) {
-            if ($i->getAccepted()) {
+            if ($i->getStatus() == 'accepted') {
                 $result[] = $i->getBudget();
             }
         }

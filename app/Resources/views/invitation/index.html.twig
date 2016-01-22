@@ -16,10 +16,12 @@
                 <td>{{ "invitation.status.#{invitation.status}"|trans }}</td>
                 <td>{{ invitation.balance }}</td>
                 <td>
-                    {% if invitation.status not in ['canceled','declined'] %}
-                        <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'cancel' }) }}" class="btn btn-default btn-sm"><i class="fa fa-ban"></i> {% trans %}invitation.cancel{% endtrans %}</a>
-                    {% else %}
-                        <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'renew' }) }}" class="btn btn-default btn-sm"><i class="fa fa-repeat"></i> {% trans %}invitation.renew{% endtrans %}</a>
+                    {% if invitation.status != 'manager' %}
+                        {% if invitation.status not in ['canceled','declined'] %}
+                            <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'cancel' }) }}" class="btn btn-default btn-sm"><i class="fa fa-ban"></i> {% trans %}invitation.cancel{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'renew' }) }}" class="btn btn-default btn-sm"><i class="fa fa-repeat"></i> {% trans %}invitation.renew{% endtrans %}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>

@@ -14,12 +14,6 @@
 
     <div class="row">
         <div class="col-md-12">
-            <p>{% trans with {'%username%': budget.user.username } %}budget.by{% endtrans %}</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
             <a href="{{ path('sb_bill_new', { 'budget_id': budget.id }) }}" class="btn btn-default">{% trans %}bill.new{% endtrans %}</a>
             <a href="{{ path('sb_invitation_new', { 'budget_id': budget.id }) }}" class="btn btn-default">{% trans %}invitation.new{% endtrans %}</a>
         </div>

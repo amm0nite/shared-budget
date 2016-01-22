@@ -8,6 +8,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Budget;
+use AppBundle\Entity\Invitation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\Type\BudgetType;
@@ -35,8 +36,15 @@ class BudgetController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $budget->setUser($this->getUser());
 
+            $invitation = new Invitation();
+            $invitation->setBudget($budget);
+            $invitation->setUser($budget->getUser());
+            $invitation->setTarget($budget->getUser());
+            $invitation->setStatus('manager');
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($budget);
+            $em->persist($invitation);
             $em->flush();
 
             $this->addFlash('notice', $this->get('translator')->trans('budget.createsuccessful'));

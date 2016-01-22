@@ -43,8 +43,7 @@ class BillType extends AbstractType {
 
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'members' => array(),
-            'selected_members' => array()
+            'members' => array()
         ));
     }
 }
