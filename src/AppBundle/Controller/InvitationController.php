@@ -60,7 +60,7 @@ class InvitationController extends Controller {
         $invitation->setStatus($actions[$action]);
 
         $action = new Action();
-        $action->setTemplate('invitation_cancel');
+        $action->setTemplate('invitation_update');
         $action->setBudget($budget);
         $action->setData(array(
             'id' => $invitation->getId(),
