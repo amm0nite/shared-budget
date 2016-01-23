@@ -14,7 +14,8 @@
             <tr>
                 <td>{{ invitation.target.username }}</a></td>
                 <td>{{ "invitation.status.#{invitation.status}"|trans }}</td>
-                <td>{{ invitation.balance }}</td>
+                {% if balance[invitation.target.id] >= 0 %}{% set colorClass = 'text-success' %}{% else %}{% set colorClass = 'text-danger' %}{% endif %}
+                <td class="{{ colorClass }}">{{ balance[invitation.target.id] }}</td>
                 <td>
                     {% if invitation.status != 'manager' %}
                         {% if invitation.status not in ['canceled','declined'] %}

@@ -23,8 +23,11 @@ class BillController extends Controller {
 
         $bill = new Bill();
         $bill->setBudget($budget);
+
         $members = $budget->getMembers();
-        $bill->setGuests($members);
+        if ($bill->getGuests()->isEmpty()) {
+            $bill->setGuests($members);
+        }
 
         $form = $this->createForm(BillType::class, $bill, array(
             'members' => $members

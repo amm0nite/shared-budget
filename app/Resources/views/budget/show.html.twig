@@ -21,7 +21,7 @@
 
     <div style="height:20px;"></div>
 
-    {{ include('invitation/index.html.twig', { 'budget': budget, 'invitations': budget.invitations }) }}
+    {{ include('invitation/index.html.twig', { 'budget': budget, 'invitations': budget.invitations, 'balance': budget.balance }) }}
 
     {{ include('bill/index.html.twig', { 'budget': budget, 'bills': budget.bills }) }}
 

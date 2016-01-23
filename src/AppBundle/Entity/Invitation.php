@@ -127,10 +127,6 @@ class Invitation {
         $this->updated = new \DateTime();
     }
 
-    public function getBalance() {
-        return "todo";
-    }
-
     /**
      * @return array
      */

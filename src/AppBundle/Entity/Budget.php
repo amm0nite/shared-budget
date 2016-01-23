@@ -144,6 +144,30 @@ class Budget {
     /**
      * @return array
      */
+    public function getBalance() {
+        $members = $this->getMembers();
+        $balance = array();
+        foreach ($members as $member) {
+            $balance[$member->getId()] = 0;
+        }
+
+        foreach ($this->getBills() as $bill) {
+            $guests = $bill->getGuests();
+            if ($guests->count() > 0) {
+                $part = $bill->getPrice() / $guests->count();
+                foreach ($guests as $guest) {
+                    $balance[$guest->getId()] -= $part;
+                }
+                $balance[$bill->getPayer()->getId()] += $bill->getPrice();
+            }
+        }
+
+        return $balance;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray() {
         return array(
             'name' => $this->getName(),
