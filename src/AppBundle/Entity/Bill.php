@@ -200,4 +200,28 @@ class Bill
     public function setUpdated() {
         $this->updated = new \DateTime();
     }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function removeDuplicateGuests() {
+        // symfony forms with ManyToMany does weird stuff
+        // lets filter duplicated guests
+        // no information is lost
+
+        $seen = array();
+        $newGuests = new ArrayCollection();
+        $removed = array();
+        foreach ($this->getGuests() as $guest) {
+            if (!in_array($guest->getId(), $seen)) {
+                $seen[] = $guest->getId();
+                $newGuests[] = $guest;
+            }
+            else {
+                $removed[] = $guest->getId();
+            }
+        }
+        $this->setGuests($newGuests);
+    }
 }
