@@ -41,11 +41,7 @@ class BillController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $bill->setUser($this->getUser());
 
-            $action = new Action();
-            $action->setTemplate('bill_new');
-            $action->setBudget($budget);
-            $action->setUser($this->getUser());
-            $action->setData($bill->toArray());
+            $action = Action::newBill($budget, $this->getUser(), $bill->toArray());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($bill);
@@ -73,14 +69,7 @@ class BillController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $action = new Action();
-            $action->setTemplate('bill_edit');
-            $action->setBudget($budget);
-            $action->setUser($this->getUser());
-            $action->setData(array(
-                'before' => $before,
-                'after' => $bill->toArray()
-            ));
+            $action = Action::editBill($budget, $this->getUser(), $before, $bill->toArray());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($bill);
@@ -101,11 +90,7 @@ class BillController extends Controller {
         $bill = $this->get('app.checker')->bill($this->getUser(), $id);
         $budget = $bill->getBudget();
 
-        $action = new Action();
-        $action->setTemplate('bill_delete');
-        $action->setBudget($budget);
-        $action->setUser($this->getUser());
-        $action->setData($bill->toArray());
+        $action = Action::deleteBill($budget, $this->getUser(), $bill->toArray());
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($bill);

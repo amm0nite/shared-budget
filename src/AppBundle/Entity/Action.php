@@ -76,17 +76,17 @@ class Action {
     }
 
     /**
+     * @param array $data
+     */
+    private function setData(array $data) {
+        $this->data = json_encode($data);
+    }
+
+    /**
      * @return array
      */
     public function getData() {
         return json_decode($this->data, true);
-    }
-
-    /**
-     * @param array $data
-     */
-    public function setData(array $data) {
-        $this->data = json_encode($data);
     }
 
     public function setTemplate($template) {
@@ -140,5 +140,107 @@ class Action {
 
     public function getUsername() {
         return $this->username;
+    }
+
+    public static function newBill(Budget $budget, User $user, array $bill) {
+        $action = new Action();
+        $action->setTemplate('bill_new');
+        $action->setBudget($budget);
+        $action->setUser($user);
+        $action->setData($bill);
+        return $action;
+    }
+
+    public static function editBill(Budget $budget, User $user, array $before, array $after) {
+        $action = new Action();
+        $action->setTemplate('bill_edit');
+        $action->setBudget($budget);
+        $action->setUser($user);
+
+        $differences = array();
+
+        $keys = array('name', 'description', 'price', 'date');
+        foreach ($keys as $key) {
+            if ($before[$key] != $after[$key]) {
+                $differences[$key] = array($before[$key], $after[$key]);
+            }
+        }
+
+        if ($before['payer']['id'] != $after['payer']['id']) {
+            $differences['payer'] = array($before['payer']['username'], $after['payer']['username']);
+        }
+
+        $beforeGuestIds = array();
+        foreach ($before['guests'] as $guest) {
+            $beforeGuestIds[] = $guest['id'];
+        }
+        $afterGuestIds = array();
+        foreach ($after['guests'] as $guest) {
+            $afterGuestIds[] = $guest['id'];
+        }
+
+        $added = array();
+        foreach ($after['guests'] as $guest) {
+            if (!in_array($guest['id'], $beforeGuestIds)) {
+                $added[] = $guest['username'];
+            }
+        }
+        $removed = array();
+        foreach ($before['guests'] as $guest) {
+            if (!in_array($guest['id'], $afterGuestIds)) {
+                $removed[] = $guest['username'];
+            }
+        }
+
+        if (count($added) > 0) {
+            $differences['added_guests'] = $added;
+        }
+        if (count($removed) > 0) {
+            $differences['removed_guests'] = $removed;
+        }
+
+        $data = $after;
+        $data['differences'] = $differences;
+        $action->setData($data);
+        return $action;
+    }
+
+    public static function deleteBill(Budget $budget, User $user, array $bill) {
+        $action = new Action();
+        $action->setTemplate('bill_delete');
+        $action->setBudget($budget);
+        $action->setUser($user);
+        $action->setData($bill);
+        return $action;
+    }
+
+    public static function newBudget(Budget $budget, User $user, array $bud) {
+        $action = new Action();
+        $action->setTemplate('budget_new');
+        $action->setBudget($budget);
+        $action->setUser($user);
+        $action->setData($bud);
+        return $action;
+    }
+
+    public static function editBudget(Budget $budget, User $user, array $before, array $after) {
+        $action = new Action();
+        $action->setTemplate('budget_edit');
+        $action->setBudget($budget);
+        $action->setUser($user);
+
+        $data = array();
+        // TODO editBudget
+        $action->setData($data);
+        return $action;
+    }
+
+    public static function deleteBudget(Budget $budget, User $user, array $bud) {
+        $action = new Action();
+        $action->setTemplate('budget_delete');
+        $action->setBudget($budget);
+        $action->setUser($user);
+        $action->setData($bud);
+        return $action;
     }
 }

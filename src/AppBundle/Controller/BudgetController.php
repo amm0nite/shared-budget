@@ -42,11 +42,7 @@ class BudgetController extends Controller {
             $invitation->setTarget($budget->getUser());
             $invitation->setStatus('manager');
 
-            $action = new Action();
-            $action->setTemplate('budget_new');
-            $action->setBudget($budget);
-            $action->setUser($this->getUser());
-            $action->setData($budget->toArray());
+            $action = Action::newBudget($budget, $this->getUser(), $budget->toArray());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($budget);
@@ -72,13 +68,7 @@ class BudgetController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $action = new Action();
-            $action->setTemplate('budget_edit');
-            $action->setBudget($budget);
-            $action->setData(array(
-                'before' => $before,
-                'after' => $budget->toArray()
-            ));
+            $action = Action::editBudget($budget, $this->getUser(), $before, $budget->toArray());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($budget);
@@ -99,10 +89,7 @@ class BudgetController extends Controller {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id);
 
         if ($request->query->get('confirm')) {
-            $action = new Action();
-            $action->setTemplate('budget_delete');
-            $action->setUser($this->getUser());
-            $action->setData($budget->toArray());
+            $action = Action::deleteBudget($budget, $this->getUser(), $budget->toArray());
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($budget);

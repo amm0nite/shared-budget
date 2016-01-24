@@ -194,6 +194,7 @@ class Bill
             'name' => $this->name,
             'price' => $this->price,
             'description' => $this->description,
+            'date' => $this->getDate()->getTimestamp(),
             'payer' => $this->getPayer()->toArray(),
             'guests' => array()
         );
