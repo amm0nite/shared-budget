@@ -36,6 +36,11 @@ class Bill
      * @ORM\Column(type="text")
      */
     protected $description;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $date;
     
     /**
      * @ORM\Column(type="datetime", nullable=TRUE)
@@ -111,6 +116,17 @@ class Bill
     
     public function getDescription() {
         return $this->description;
+    }
+
+    public function setDate(\DateTime $date) {
+        $this->date = $date;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate() {
+        return $this->date;
     }
 
     /**

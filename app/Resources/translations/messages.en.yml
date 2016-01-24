@@ -48,6 +48,7 @@ bill.accessdenied: "Access denied"
 bill.caption: "Bills"
 bill.payer: "Payer"
 bill.guests: "For"
+bill.date: "Date"
 
 user.unknownusername: "This is not a valid username"
 

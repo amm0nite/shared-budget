@@ -116,14 +116,14 @@ class Budget {
     }
 
     /**
-     * @return Bill[]
+     * @return Bill[]|ArrayCollection
      */
     public function getBills() {
         return $this->bills;
     }
 
     /**
-     * @return Invitation[]
+     * @return Invitation[]|ArrayCollection
      */
     public function getInvitations() {
         return $this->invitations;

@@ -24,6 +24,10 @@ class BillController extends Controller {
         $bill = new Bill();
         $bill->setBudget($budget);
 
+        if (!$bill->getDate()) {
+            $bill->setDate(new \DateTime());
+        }
+
         $members = $budget->getMembers();
         if ($bill->getGuests()->isEmpty()) {
             $bill->setGuests($members);

@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BillType extends AbstractType {
@@ -21,6 +22,7 @@ class BillType extends AbstractType {
         $builder
             ->add('name', TextType::class, array('label' => 'bill.name'))
             ->add('description', TextareaType::class, array('label' => 'bill.description'))
+            ->add('date', DateTimeType::class, array('label' => 'bill.date'))
             ->add('price', MoneyType::class, array('label' => 'bill.price'))
             ->add('payer', EntityType::class, array(
                 'label' => 'bill.payer',

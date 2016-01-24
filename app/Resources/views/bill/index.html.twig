@@ -4,8 +4,8 @@
         <thead>
         <tr>
             <th>{% trans %}bill.name{% endtrans %}</th>
-            <th>{% trans %}bill.payer{% endtrans %}</th>
             <th>{% trans %}bill.price{% endtrans %}</th>
+            <th>{% trans %}bill.date{% endtrans %}</th>
             <th>{% trans %}bill.actions{% endtrans %}</th>
         </tr>
         </thead>
@@ -13,8 +13,8 @@
         {% for bill in bills %}
             <tr>
                 <td>{{ bill.name }}</td>
-                <td>{{ bill.payer.username }}</td>
                 <td>{{ bill.price }}</td>
+                <td>{{ bill.date|date('datetime'|trans) }}</td>
                 <td>{{ include('bill/buttons.html.twig', { 'bill': bill }) }}</td>
             </tr>
         {% endfor %}
