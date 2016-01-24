@@ -65,6 +65,12 @@ class User extends BaseUser {
     protected $budgets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Action", mappedBy="user")
+     * @var Action[]
+     */
+    protected $actions;
+
+    /**
      * User constructor.
      */
     public function __construct() {
@@ -75,6 +81,7 @@ class User extends BaseUser {
         $this->invitationsSent = new ArrayCollection();
         $this->invitationsReceived = new ArrayCollection();
         $this->budgets = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
     
     /**

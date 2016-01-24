@@ -36,6 +36,12 @@ class Action {
     protected $budget;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="actions")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
+    /**
      * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $created;
@@ -59,6 +65,16 @@ class Action {
         $this->updated = new \DateTime();
     }
 
+    /**
+     * @return array
+     */
+    public function getData() {
+        return json_decode($this->data, true);
+    }
+
+    /**
+     * @param array $data
+     */
     public function setData(array $data) {
         $this->data = json_encode($data);
     }
@@ -69,6 +85,13 @@ class Action {
 
     public function getTemplate() {
         return $this->template;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated() {
+        return $this->created;
     }
 
     /**
@@ -83,5 +106,19 @@ class Action {
      */
     public function getBudget() {
         return $this->budget;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user) {
+        $this->user = $user;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser() {
+        return $this->user;
     }
 }

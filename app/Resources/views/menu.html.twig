@@ -2,7 +2,7 @@
 
 
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_activity' %}active{% endif %}"><a href=""><i class="fa fa-bell"></i> {% trans %}menu.activity{% endtrans %}</a></li>
+        <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_activity' %}active{% endif %}"><a href="{{ path('sb_activity') }}"><i class="fa fa-bell"></i> {% trans %}menu.activity{% endtrans %}</a></li>
         <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_budget' %}active{% endif %}"><a href="{{ path('sb_budgets') }}"><i class="fa fa-book"></i> {% trans %}menu.budgets{% endtrans %}</a></li>
         <li role="presentation" class="{% if app.request.get('_route') starts with 'fos_user_profile' %}active{% endif %}"><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> {{ app.user.username }}</a></li>
         <li role="presentation" class="{% if app.request.get('_route') == 'fos_user_security_logout' %}active{% endif %}"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {% trans %}menu.logout{% endtrans %}</a></li>

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for action in actions %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{ include("activity/#{action.template}.html.twig") }}
+                <p class="text-right">{{ action.created|date('datetime'|trans) }} {{ action.budget.name }}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}
