@@ -27,6 +27,7 @@ class InvitationController extends Controller {
             $action = new Action();
             $action->setTemplate('invitation_new');
             $action->setBudget($budget);
+            $action->setUser($this->getUser());
             $action->setData(array(
                 'budget' => $invitation->getBudget()->getId(),
                 'user' => $invitation->getUser()->getId(),
@@ -53,15 +54,16 @@ class InvitationController extends Controller {
         $budget = $invitation->getBudget();
         $before = $invitation->getStatus();
 
-        $actions = array(
+        $actionToStatus = array(
             'cancel' => 'canceled',
             'renew' => 'pending'
         );
-        $invitation->setStatus($actions[$action]);
+        $invitation->setStatus($actionToStatus[$action]);
 
         $action = new Action();
         $action->setTemplate('invitation_update');
         $action->setBudget($budget);
+        $action->setUser($this->getUser());
         $action->setData(array(
             'id' => $invitation->getId(),
             'before' => $before,

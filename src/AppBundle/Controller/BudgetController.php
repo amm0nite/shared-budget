@@ -42,9 +42,16 @@ class BudgetController extends Controller {
             $invitation->setTarget($budget->getUser());
             $invitation->setStatus('manager');
 
+            $action = new Action();
+            $action->setTemplate('budget_new');
+            $action->setBudget($budget);
+            $action->setUser($this->getUser());
+            $action->setData($budget->toArray());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($budget);
             $em->persist($invitation);
+            $em->persist($action);
             $em->flush();
 
             $this->addFlash('notice', $this->get('translator')->trans('budget.createsuccessful'));
@@ -92,8 +99,14 @@ class BudgetController extends Controller {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id);
 
         if ($request->query->get('confirm')) {
+            $action = new Action();
+            $action->setTemplate('budget_delete');
+            $action->setUser($this->getUser());
+            $action->setData($budget->toArray());
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($budget);
+            $em->persist($action);
             $em->flush();
 
             $this->addFlash('notice', $this->get('translator')->trans('budget.deletesuccessful'));

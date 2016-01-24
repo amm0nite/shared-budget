@@ -44,6 +44,7 @@ class BillController extends Controller {
             $action = new Action();
             $action->setTemplate('bill_new');
             $action->setBudget($budget);
+            $action->setUser($this->getUser());
             $action->setData($bill->toArray());
 
             $em = $this->getDoctrine()->getManager();
@@ -75,6 +76,7 @@ class BillController extends Controller {
             $action = new Action();
             $action->setTemplate('bill_edit');
             $action->setBudget($budget);
+            $action->setUser($this->getUser());
             $action->setData(array(
                 'before' => $before,
                 'after' => $bill->toArray()
@@ -102,6 +104,7 @@ class BillController extends Controller {
         $action = new Action();
         $action->setTemplate('bill_delete');
         $action->setBudget($budget);
+        $action->setUser($this->getUser());
         $action->setData($bill->toArray());
 
         $em = $this->getDoctrine()->getManager();

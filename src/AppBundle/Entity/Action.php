@@ -25,6 +25,16 @@ class Action {
     protected $template;
 
     /**
+     * @ORM\Column(type="string", length=64)
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    protected $budgetname;
+
+    /**
      * @ORM\Column(type="text")
      */
     protected $data;
@@ -99,6 +109,7 @@ class Action {
      */
     public function setBudget(Budget $budget) {
         $this->budget = $budget;
+        $this->budgetname = $budget->getName();
     }
 
     /**
@@ -108,11 +119,16 @@ class Action {
         return $this->budget;
     }
 
+    public function getBudgetname() {
+        return $this->budgetname;
+    }
+
     /**
      * @param User $user
      */
     public function setUser(User $user) {
         $this->user = $user;
+        $this->username = $user->getUsername();
     }
 
     /**
@@ -120,5 +136,9 @@ class Action {
      */
     public function getUser() {
         return $this->user;
+    }
+
+    public function getUsername() {
+        return $this->username;
     }
 }
