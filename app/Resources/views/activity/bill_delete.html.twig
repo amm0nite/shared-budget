@@ -1,0 +1,9 @@
+<p>
+    {% trans with { '%username%':action.username, '%budgetname%':action.budgetname } %}
+        action.bill.delete
+    {% endtrans %}
+    <br>
+    {% trans with { '%name%':action.data['name'], '%payer%':action.data['payer']['username'], '%price%':action.data['price'] } %}
+        action.bill.detail
+    {% endtrans %}
+</p>

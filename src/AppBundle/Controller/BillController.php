@@ -97,7 +97,7 @@ class BillController extends Controller {
         $em->persist($action);
         $em->flush();
 
-        $this->addFlash('notice', $this->get('translator')->trans('budget.deletesuccessful'));
+        $this->addFlash('notice', $this->get('translator')->trans('bill.deletesuccessful'));
         return $this->redirectToRoute('sb_budget_show', array('id' => $budget->getId()));
     }
 }

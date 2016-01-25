@@ -54,13 +54,13 @@ class Bill
     
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="bills")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="payments")
-     * @ORM\JoinColumn(name="payer_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="payer_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $payer;
 
@@ -73,7 +73,7 @@ class Bill
 
     /**
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="bills")
-     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $budget;
 

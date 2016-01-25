@@ -24,15 +24,7 @@ class InvitationController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $invitation->setUser($this->getUser());
 
-            $action = new Action();
-            $action->setTemplate('invitation_new');
-            $action->setBudget($budget);
-            $action->setUser($this->getUser());
-            $action->setData(array(
-                'budget' => $invitation->getBudget()->getId(),
-                'user' => $invitation->getUser()->getId(),
-                'target' => $invitation->getTarget()->getId()
-            ));
+            $action = Action::newInvitation($budget, $this->getUser(), $invitation->toArray());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);
@@ -52,7 +44,7 @@ class InvitationController extends Controller {
     public function updateAction($id, $action) {
         $invitation = $this->get('app.checker')->invitation($this->getUser(), $id);
         $budget = $invitation->getBudget();
-        $before = $invitation->getStatus();
+        $before = $invitation->toArray();
 
         $actionToStatus = array(
             'cancel' => 'canceled',
@@ -60,15 +52,7 @@ class InvitationController extends Controller {
         );
         $invitation->setStatus($actionToStatus[$action]);
 
-        $action = new Action();
-        $action->setTemplate('invitation_update');
-        $action->setBudget($budget);
-        $action->setUser($this->getUser());
-        $action->setData(array(
-            'id' => $invitation->getId(),
-            'before' => $before,
-            'after' => $invitation->getStatus()
-        ));
+        $action = Action::updateInvitation($budget, $this->getUser(), $before, $invitation->toArray());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($invitation);

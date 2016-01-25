@@ -1,7 +1,5 @@
 <p>
-    {% trans with { '%username%':action.username, '%budgetname%':action.budgetname, '%target%':action.data['target']['username'] } %}
-        action.invitation.update
-    {% endtrans %}
+    {% trans with { '%username%':action.username, '%budgetname%':action.budgetname } %}action.budget.edit{% endtrans %}
     {% for key, values in action.data['differences'] %}
         <br>{% trans with { '%key%':key, '%before%':values[0], '%after%':values[1] } %}action.changedto{% endtrans %}
     {% endfor %}

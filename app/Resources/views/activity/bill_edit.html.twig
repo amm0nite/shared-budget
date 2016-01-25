@@ -1,4 +1,18 @@
 <p>
-    <strong>{{ action.username }}</strong> has modified a bill in budget <strong>{{ action.budgetname }}</strong>
-    
+    {% trans with { '%username%':action.username, '%budgetname%':action.budgetname } %}action.bill.edit{% endtrans %}
+    {% for key, values in action.data['differences'] %}
+        {% if key not in ['added_guests', 'removed_guests'] %}
+            <br>{% trans with { '%key%':key, '%before%':values[0], '%after%':values[1] } %}action.changedto{% endtrans %}
+        {% endif %}
+    {% endfor %}
+    {% if action.data['differences']['added_guests'] is defined %}
+        <br>
+        {% set guests = action.data['differences']['added_guests']|join(', ') %}
+        {% trans with { '%guests%':guests } %}action.bill.addedguests{% endtrans %}
+    {% endif %}
+    {% if action.data['differences']['removed_guests'] is defined %}
+        <br>
+        {% set guests = action.data['differences']['removed_guests']|join(', ') %}
+        {% trans with { '%guests%':guests } %}action.bill.removedguests{% endtrans %}
+    {% endif %}
 </p>

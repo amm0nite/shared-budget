@@ -21,20 +21,20 @@ class Invitation {
 
     /**
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="invitations")
-     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="CASCADE")
      * @var Budget $budget
      */
     protected $budget;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="invitationsSent")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="invitationsReceived")
-     * @ORM\JoinColumn(name="target_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="target_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $target;
 
@@ -135,7 +135,8 @@ class Invitation {
             'id' => $this->id,
             'user' => $this->getUser()->toArray(),
             'target' => $this->getTarget()->toArray(),
-            'budget' => $this->getBudget()->toArray()
+            'budget' => $this->getBudget()->toArray(),
+            'status' => $this->getStatus()
         );
     }
 }

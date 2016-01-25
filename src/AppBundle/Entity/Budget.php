@@ -57,7 +57,7 @@ class Budget {
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="budgets")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $user;
     

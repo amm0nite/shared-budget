@@ -1,0 +1,5 @@
+<p>
+    {% trans with { '%username%':action.username, '%budgetname%':action.budgetname } %}
+        action.budget.delete
+    {% endtrans %}
+</p>

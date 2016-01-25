@@ -1,0 +1,5 @@
+<p>
+    {% trans with { '%username%':action.username, '%budgetname%':action.budgetname, '%target%':action.data['target']['username'] } %}
+        action.invitation.new
+    {% endtrans %}
+</p>

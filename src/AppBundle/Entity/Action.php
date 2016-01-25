@@ -41,13 +41,13 @@ class Action {
 
     /**
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="actions")
-     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $budget;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="actions")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $user;
 
@@ -229,8 +229,16 @@ class Action {
         $action->setBudget($budget);
         $action->setUser($user);
 
-        $data = array();
-        // TODO editBudget
+        $differences = array();
+        $keys = array('name', 'description');
+        foreach ($keys as $key) {
+            if ($before[$key] != $after[$key]) {
+                $differences[$key] = array($before[$key], $after[$key]);
+            }
+        }
+
+        $data = $after;
+        $data['differences'] = $differences;
         $action->setData($data);
         return $action;
     }
@@ -241,6 +249,32 @@ class Action {
         $action->setBudget($budget);
         $action->setUser($user);
         $action->setData($bud);
+        return $action;
+    }
+
+    public static function newInvitation(Budget $budget, User $user, array $invitation) {
+        $action = new Action();
+        $action->setTemplate('invitation_new');
+        $action->setBudget($budget);
+        $action->setUser($user);
+        $action->setData($invitation);
+        return $action;
+    }
+
+    public static function updateInvitation(Budget $budget, User $user, array $before, array $after) {
+        $action = new Action();
+        $action->setTemplate('invitation_update');
+        $action->setBudget($budget);
+        $action->setUser($user);
+
+        $differences = array();
+        if ($before['status'] != $after['status']) {
+            $differences['status'] = array($before['status'], $after['status']);
+        }
+
+        $data = $after;
+        $data['differences'] = $differences;
+        $action->setData($data);
         return $action;
     }
 }
