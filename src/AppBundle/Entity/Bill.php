@@ -41,6 +41,11 @@ class Bill
      * @ORM\Column(type="datetime")
      */
     protected $date;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $monthly;
     
     /**
      * @ORM\Column(type="datetime", nullable=TRUE)
@@ -82,6 +87,7 @@ class Bill
      */
     public function  __construct() {
         $this->guests = new ArrayCollection();
+        $this->monthly = false;
     }
 
     public function getId() {
@@ -183,6 +189,20 @@ class Bill
      */
     public function getGuests() {
         return $this->guests;
+    }
+
+    /**
+     * @param boolean $bool
+     */
+    public function setMonthly($bool) {
+        $this->monthly = (bool) $bool;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getMonthly() {
+        return $this->monthly;
     }
 
     /**

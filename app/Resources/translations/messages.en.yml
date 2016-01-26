@@ -50,6 +50,7 @@ bill.caption: "Bills"
 bill.payer: "Payer"
 bill.guests: "For"
 bill.date: "Date"
+bill.monthly: "Repeat this bill each month"
 
 user.unknownusername: "This is not a valid username"
 
