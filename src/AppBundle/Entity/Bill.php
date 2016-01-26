@@ -261,4 +261,22 @@ class Bill
         }
         $this->setGuests($newGuests);
     }
+
+    /**
+     * @param Bill $other
+     * @return Bill
+     */
+    public static function copyFrom(Bill $other) {
+        $bill = new Bill();
+        $bill->name = $other->name;
+        $bill->description = $other->description;
+        $bill->price = $other->price;
+        $bill->date = $other->date;
+        $bill->monthly = $other->monthly;
+        $bill->user = $other->user;
+        $bill->payer = $other->payer;
+        $bill->guests = $other->guests;
+        $bill->budget = $other->budget;
+        return $bill;
+    }
 }
