@@ -4,6 +4,7 @@
 
     {% for action in actions %}
         <div class="panel panel-default">
+            <div class="panel-heading"><span class="timeago" data-when="{{ action.created|date('U') }}"></span> ({{ action.created|date('datetime'|trans) }})</div>
             <div class="panel-body">
                 <!-- {{ action.template }} -->
                 {{ include("activity/#{action.template}.html.twig") }}
@@ -14,4 +15,12 @@
 {% endblock body %}
 
 {% block js %}
+    (function() {
+        $('.timeago').each(function() {
+            var when = parseInt($(this).attr('data-when') + '000');
+            var str = moment(when).fromNow();
+            str = str[0].toUpperCase() + str.slice(1);
+            $(this).html(str);
+        });
+    })();
 {% endblock js %}
