@@ -37,6 +37,7 @@ class Checker {
     /**
      * @param User $user
      * @param $id
+     * @param bool $requireOwnership
      * @return Entity\Budget
      */
     public function budget(User $user, $id, $requireOwnership = true) {
@@ -90,6 +91,12 @@ class Checker {
         return $bill;
     }
 
+    /**
+     * @param User $user
+     * @param $id
+     * @param bool $requireOwnership
+     * @return Entity\Invitation
+     */
     public function invitation(User $user, $id, $requireOwnership = true) {
         $repo = $this->registry->getRepository('AppBundle:Invitation');
         $invitation = $repo->find($id);
