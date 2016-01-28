@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('sb_budget_show', { 'id': budget.id }) }}" class="btn btn-default">{% trans %}bill.returntobudget{% endtrans %}</a>
+        </div>
+    </div>
+
+    {% for userId, userDebts in debts %}
+        {% if userDebts|length > 0 %}
+            <h2>{% trans with { '%username%': usernames[userId] } %}repay.debts{% endtrans %}</h2>
+            <ul>
+                {% for id, amount in userDebts %}
+                    <li>{% trans with { '%username%': usernames[id], '%amount%': amount } %}repay.owes{% endtrans %}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}

@@ -118,4 +118,20 @@ class BudgetController extends Controller {
 
         return $this->render('budget/show.html.twig', array('budget' => $budget, 'bills' => $bills));
     }
+
+    /**
+     * @Route("/budget/{id}/repay", name="sb_budget_repay", requirements={"id": "\d+"})
+     */
+    public function repayAction($id) {
+        $budget = $this->get('app.checker')->budget($this->getUser(), $id, false);
+
+        $usernames = $budget->getMemberUsernames();
+        $debts = $budget->getDebts();
+
+        return $this->render('budget/repay.html.twig', array(
+            'budget' => $budget,
+            'debts' => $debts,
+            'usernames' => $usernames
+        ));
+    }
 }

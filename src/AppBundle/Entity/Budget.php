@@ -144,21 +144,105 @@ class Budget {
     /**
      * @return array
      */
+    public function getMemberUsernames() {
+        $result = array();
+        $members = $this->getMembers();
+        foreach ($members as $member) {
+            $result[$member->getId()] = $member->getUsername();
+        }
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDebts() {
+        $debts = array();
+        $balance = $this->getFullBalance();
+
+        foreach ($balance as $userId => $userBalance) {
+            $debts[$userId] = array();
+
+            foreach ($userBalance as $id => $amount) {
+                if ($amount < 0) {
+                    $debts[$userId][$id] = ($amount * -1);
+                }
+            }
+        }
+
+        return $debts;
+    }
+
+    /**
+     * @return array
+     */
     public function getBalance() {
+        $balance = array();
+        $detailedBalance = $this->getDetailedBalance();
+
+        foreach ($detailedBalance as $id => $userBalance) {
+            $sum = 0;
+            foreach ($userBalance as $debt) {
+                $sum += $debt['amount'];
+            }
+            $balance[$id] = $sum;
+        }
+
+        return $balance;
+    }
+
+    /**
+     * @return array
+     */
+    private function getFullBalance() {
+        $balance = array();
+        $detailedBalance = $this->getDetailedBalance();
+
+        foreach ($detailedBalance as $id => $userBalance) {
+            $debts = array();
+
+            foreach ($userBalance as $debt) {
+                $debtUserId = $debt['id'];
+
+                if (!isset($debts[$debtUserId])) {
+                    $debts[$debtUserId] = 0;
+                }
+
+                $debts[$debtUserId] += $debt['amount'];
+            }
+
+            $balance[$id] = $debts;
+        }
+
+        return $balance;
+    }
+
+    /**
+     * @return array
+     */
+    private function getDetailedBalance() {
         $members = $this->getMembers();
         $balance = array();
+
         foreach ($members as $member) {
-            $balance[$member->getId()] = 0;
+            $balance[$member->getId()] = array();
         }
 
         foreach ($this->getBills() as $bill) {
             $guests = $bill->getGuests();
+
             if ($guests->count() > 0) {
+                $pid = $bill->getPayer()->getId();
                 $part = $bill->getPrice() / $guests->count();
+
                 foreach ($guests as $guest) {
-                    $balance[$guest->getId()] -= $part;
+                    $gid = $guest->getId();
+
+                    if ($pid != $gid) {
+                        $balance[$gid][] = array('id' => $pid, 'amount' => ($part * -1));
+                        $balance[$pid][] = array('id' => $gid, 'amount' => $part);
+                    }
                 }
-                $balance[$bill->getPayer()->getId()] += $bill->getPrice();
             }
         }
 
