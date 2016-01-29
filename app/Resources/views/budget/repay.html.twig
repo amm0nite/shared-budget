@@ -8,21 +8,29 @@
         </div>
     </div>
 
-    {% for userId, userDebts in debts %}
-        {% if userDebts|length > 0 %}
-            <h2>{% trans with { '%username%': usernames[userId] } %}repay.debts{% endtrans %}</h2>
-            <p>
-                {% for id, amount in userDebts %}
-                    {% set name = 'repay.billname'|trans({ '%payer%': usernames[userId], '%payee%':usernames[id] }) %}
-                    {% set data = { 'budget_id':budget.id, 'name':name, 'price':amount, 'payer':userId, 'payee':id } %}
+    <div style="height:20px;"></div>
 
-                    <a href="{{ path('sb_bill_new', data) }}" class="btn btn-default">
-                        {% trans with { '%username%': usernames[id], '%amount%': amount } %}repay.owes{% endtrans %}
-                    </a>
-                {% endfor %}
-            </p>
-        {% endif %}
-    {% endfor %}
+    {% if debts|length > 0 %}
+        {% for userId, userDebts in debts %}
+            {% if userDebts|length > 0 %}
+                <h2>{% trans with { '%username%': usernames[userId] } %}repay.debts{% endtrans %}</h2>
+                <p>
+                    {% for id, amount in userDebts %}
+                        {% set name = 'repay.billname'|trans({ '%payer%': usernames[userId], '%payee%':usernames[id] }) %}
+                        {% set data = { 'budget_id':budget.id, 'name':name, 'price':amount, 'payer':userId, 'payee':id } %}
+
+                        <a href="{{ path('sb_bill_new', data) }}" class="btn btn-default">
+                            {% trans with { '%username%': usernames[id], '%amount%': amount } %}repay.owes{% endtrans %}
+                        </a>
+                    {% endfor %}
+                </p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info" role="alert">{% trans %}repay.none{% endtrans %}</div>
+    {% endif %}
+
+
 
 {% endblock body %}
 
