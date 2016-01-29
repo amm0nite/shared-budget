@@ -87,6 +87,7 @@ action.bill.addedguests: "Added : <strong>%guests%</strong>"
 action.bill.removedguests: "Removed : <strong>%guests%</strong>"
 action.invitation.new: "<strong>%username%</strong> has invited <strong>%target%</strong> to the budget <strong>%budgetname%</strong>"
 action.invitation.update : "<strong>%username%</strong> has modified the invitation of <strong>%target%</strong> to the budget <strong>%budgetname%</strong>"
+action.none: "Nothing happened!"
 
 repay.show: "Reimbursements"
 repay.debts: "%username% debts"

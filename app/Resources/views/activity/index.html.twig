@@ -2,15 +2,20 @@
 
 {% block body %}
 
-    {% for action in actions %}
-        <div class="panel panel-default">
-            <div class="panel-heading"><span class="timeago" data-when="{{ action.created|date('U') }}"></span> ({{ action.created|date('datetime'|trans) }})</div>
-            <div class="panel-body">
-                <!-- {{ action.template }} -->
-                {{ include("activity/#{action.template}.html.twig") }}
+    {% if actions|length > 0 %}
+        {% for action in actions %}
+            <div class="panel panel-default">
+                <div class="panel-heading"><span class="timeago" data-when="{{ action.created|date('U') }}"></span> ({{ action.created|date('datetime'|trans) }})</div>
+                <div class="panel-body">
+                    <!-- {{ action.template }} -->
+                    {{ include("activity/#{action.template}.html.twig") }}
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info" role="alert">{% trans %}action.none{% endtrans %}</div>
+    {% endif %}
+
 
 {% endblock body %}
 
