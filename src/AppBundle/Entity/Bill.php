@@ -33,7 +33,7 @@ class Bill
     protected $price;
     
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=TRUE)
      */
     protected $description;
 

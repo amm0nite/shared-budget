@@ -17,7 +17,7 @@ class BudgetType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('name', TextType::class, array('label' => 'budget.name'))
-            ->add('description', TextareaType::class, array('label' => 'budget.description'))
+            ->add('description', TextareaType::class, array('label' => 'budget.description', 'required' => false))
             ->add('save', SubmitType::class, array('label' => 'budget.save'));
     }
 }

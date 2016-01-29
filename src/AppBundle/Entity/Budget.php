@@ -26,7 +26,7 @@ class Budget {
     protected $name;
     
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=TRUE)
      */
     protected $description;
     
@@ -157,20 +157,51 @@ class Budget {
      * @return array
      */
     public function getDebts() {
-        $debts = array();
-        $balance = $this->getFullBalance();
+        $result = array();
 
+        $balance = $this->getBalance();
+
+        // calculate amount of money that should move
+        $sum = 0;
         foreach ($balance as $userId => $userBalance) {
-            $debts[$userId] = array();
-
-            foreach ($userBalance as $id => $amount) {
-                if ($amount < 0) {
-                    $debts[$userId][$id] = ($amount * -1);
-                }
+            if ($userBalance > 0) {
+                $sum += $userBalance;
             }
         }
 
-        return $debts;
+        // find people who did not pay enough
+        $badGuys = array();
+        foreach ($balance as $userId => $userBalance) {
+            if ($userBalance < 0) {
+                $badGuys[] = $userId;
+            }
+        }
+
+        // find people who did pay too much
+        $goodGuys = array();
+        foreach ($balance as $userId => $userBalance) {
+            if ($userBalance >= 0) {
+                $goodGuys[] = $userId;
+            }
+        }
+
+        // only people that did not pay enough (badguys)
+        // should repay their underpaid amount (abs($badGuyBalance))
+        // to each people who paid too much (goodguys)
+        // depending how much they over paid ($goodGuyBalance / $sum)
+        foreach ($badGuys as $badGuyId) {
+            $badGuyBalance = $balance[$badGuyId];
+            $result[$badGuyId] = array();
+
+            foreach ($goodGuys as $goodGuyId) {
+                $goodGuyBalance = $balance[$goodGuyId];
+                $ratio = $goodGuyBalance / $sum;
+
+                $result[$badGuyId][$goodGuyId] = abs($badGuyBalance) * $ratio;
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -186,32 +217,6 @@ class Budget {
                 $sum += $debt['amount'];
             }
             $balance[$id] = $sum;
-        }
-
-        return $balance;
-    }
-
-    /**
-     * @return array
-     */
-    private function getFullBalance() {
-        $balance = array();
-        $detailedBalance = $this->getDetailedBalance();
-
-        foreach ($detailedBalance as $id => $userBalance) {
-            $debts = array();
-
-            foreach ($userBalance as $debt) {
-                $debtUserId = $debt['id'];
-
-                if (!isset($debts[$debtUserId])) {
-                    $debts[$debtUserId] = 0;
-                }
-
-                $debts[$debtUserId] += $debt['amount'];
-            }
-
-            $balance[$id] = $debts;
         }
 
         return $balance;
