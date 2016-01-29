@@ -91,3 +91,4 @@ action.invitation.update : "<strong>%username%</strong> has modified the invitat
 repay.show: "Reimbursements"
 repay.debts: "%username% debts"
 repay.owes: "<strong>%amount%</strong> to <strong>%username%</strong>"
+repay.billname: "Reimbursement from %payer% to %payee%"

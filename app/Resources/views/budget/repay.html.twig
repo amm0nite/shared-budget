@@ -11,11 +11,16 @@
     {% for userId, userDebts in debts %}
         {% if userDebts|length > 0 %}
             <h2>{% trans with { '%username%': usernames[userId] } %}repay.debts{% endtrans %}</h2>
-            <ul>
+            <p>
                 {% for id, amount in userDebts %}
-                    <li>{% trans with { '%username%': usernames[id], '%amount%': amount } %}repay.owes{% endtrans %}</li>
+                    {% set name = 'repay.billname'|trans({ '%payer%': usernames[userId], '%payee%':usernames[id] }) %}
+                    {% set data = { 'budget_id':budget.id, 'name':name, 'price':amount, 'payer':userId, 'payee':id } %}
+
+                    <a href="{{ path('sb_bill_new', data) }}" class="btn btn-default">
+                        {% trans with { '%username%': usernames[id], '%amount%': amount } %}repay.owes{% endtrans %}
+                    </a>
                 {% endfor %}
-            </ul>
+            </p>
         {% endif %}
     {% endfor %}
 

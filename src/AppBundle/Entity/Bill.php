@@ -279,4 +279,26 @@ class Bill
         $bill->budget = $other->budget;
         return $bill;
     }
+
+    /**
+     * @param $name
+     * @param $price
+     * @param $payerId
+     * @param $payeeId
+     */
+    public function reimbursement($name, $price, $payerId, $payeeId) {
+        $this->name = $name;
+        $this->price = $price;
+
+        foreach ($this->getBudget()->getMembers() as $member) {
+            if ($member->getId() == $payerId) {
+                $this->payer = $member;
+            }
+            else if ($member->getId() == $payeeId) {
+                $guests = new ArrayCollection();
+                $guests->add($member);
+                $this->guests = $guests;
+            }
+        }
+    }
 }

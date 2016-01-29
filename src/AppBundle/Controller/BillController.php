@@ -33,6 +33,11 @@ class BillController extends Controller {
             $bill->setGuests($members);
         }
 
+        $query = $request->query;
+        if ($query->has('name') && $query->has('price') && $query->has('payer') && $query->has('payee')) {
+            $bill->reimbursement($query->get('name'), $query->get('price'), $query->get('payer'), $query->get('payee'));
+        }
+
         $form = $this->createForm(BillType::class, $bill, array(
             'members' => $members
         ));
