@@ -1,0 +1,20 @@
+<div class="panel panel-success">
+    <div class="panel-heading">{% trans %}budget.invitations.pending{% endtrans %}</div>
+    <table class="table table-striped">
+        <tbody>
+        {% for invitation in invitations %}
+            <tr>
+                <td>
+                    {% trans with { '%username%':invitation.user.username, '%budgetname%':invitation.budget.name } %}
+                        budget.invitations.text
+                    {% endtrans %}
+                </td>
+                <td class="text-right">
+                    <a href="{{ path('sb_invitation_answer', { 'id':invitation.id, 'action':'accept' }) }}" class="btn btn-default">{% trans %}budget.invitations.accept{% endtrans %}</a>
+                    <a href="{{ path('sb_invitation_answer', { 'id':invitation.id, 'action':'refuse' }) }}" class="btn btn-default">{% trans %}budget.invitations.refuse{% endtrans %}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

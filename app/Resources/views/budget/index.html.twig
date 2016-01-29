@@ -2,6 +2,10 @@
 
 {% block body %}
 
+    {% if invitations|length > 0 %}
+        <td>{{ include('budget/invitations.html.twig', { 'invitations': invitations }) }}</td>
+    {% endif %}
+
     <div class="row">
         <div class="col-md-12">
             <a href="{{ path('sb_budget_new') }}" class="btn btn-default">{% trans %}budget.new{% endtrans %}</a>

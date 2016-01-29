@@ -144,7 +144,7 @@ class User extends BaseUser {
      */
     public function isInvited(Budget $budget) {
         foreach ($this->invitationsReceived as $i) {
-            if ($i->getStatus() == 'accepted' && $i->getBudget()->getId() == $budget->getId()) {
+            if (in_array($i->getStatus(), array('accepted', 'pending')) && $i->getBudget()->getId() == $budget->getId()) {
                 return true;
             }
         }

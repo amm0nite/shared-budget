@@ -62,4 +62,29 @@ class InvitationController extends Controller {
         $this->addFlash('notice', $this->get('translator')->trans('invitation.updatesuccessful'));
         return $this->redirectToRoute('sb_budget_show', array('id' => $budget->getId()));
     }
+
+    /**
+     * @Route("/invitation/{id}/{action}", name="sb_invitation_answer", requirements={"id": "\d+", "action": "accept|refuse"})
+     */
+    public function answerAction($id, $action) {
+        $invitation = $this->get('app.checker')->invitation($this->getUser(), $id, false);
+        $budget = $invitation->getBudget();
+        $before = $invitation->toArray();
+
+        $actionToStatus = array(
+            'accept' => 'accepted',
+            'renew' => 'refused'
+        );
+        $invitation->setStatus($actionToStatus[$action]);
+
+        $action = Action::updateInvitation($budget, $this->getUser(), $before, $invitation->toArray());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($invitation);
+        $em->persist($action);
+        $em->flush();
+
+        $this->addFlash('notice', $this->get('translator')->trans('invitation.answersuccessful'));
+        return $this->redirectToRoute('sb_budgets');
+    }
 }

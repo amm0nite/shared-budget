@@ -9,6 +9,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Budget;
 use AppBundle\Entity\Invitation;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\Type\BudgetType;
@@ -20,8 +21,11 @@ class BudgetController extends Controller {
      * @Route("/budgets", name="sb_budgets")
      */
     public function indexAction() {
-        $budgets = $this->getUser()->getBudgets();
-        return $this->render('budget/index.html.twig', array('budgets' => $budgets));
+        $user = $this->getUser();
+        /* @var $user User */
+        $budgets = $user->getBudgets();
+        $invitations = $user->getPendingInvitationsReceived();
+        return $this->render('budget/index.html.twig', array('budgets' => $budgets, 'invitations' => $invitations));
     }
 
     /**
