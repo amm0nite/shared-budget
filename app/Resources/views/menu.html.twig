@@ -1,14 +1,31 @@
 <ul class="nav nav-tabs">
-
-
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_activity' %}active{% endif %}"><a href="{{ path('sb_activity') }}"><i class="fa fa-bell"></i> {% trans %}menu.activity{% endtrans %}</a></li>
-        <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_budget' %}active{% endif %}"><a href="{{ path('sb_budgets') }}"><i class="fa fa-book"></i> {% trans %}menu.budgets{% endtrans %}</a></li>
-        <li role="presentation" class="{% if app.request.get('_route') starts with 'fos_user_profile' %}active{% endif %}"><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> {{ app.user.username }}</a></li>
-        <li role="presentation" class="{% if app.request.get('_route') == 'fos_user_security_logout' %}active{% endif %}"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {% trans %}menu.logout{% endtrans %}</a></li>
+        <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_activity' %}active{% endif %}">
+            <a href="{{ path('sb_activity') }}"><i class="fa fa-bell"></i> {% trans %}menu.activity{% endtrans %}</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_budget' %}active{% endif %}">
+            <a href="{{ path('sb_budgets') }}">
+                <i class="fa fa-book"></i>
+                {% trans %}menu.budgets{% endtrans %}
+                {% set pending = app.user.pendingInvitationsReceived %}
+                {% if pending|length > 0 %}<span class="badge">{{ pending|length }}</span>{% endif %}
+            </a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') starts with 'fos_user_profile' %}active{% endif %}">
+            <a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user"></i> {{ app.user.username }}</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'fos_user_security_logout' %}active{% endif %}">
+            <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {% trans %}menu.logout{% endtrans %}</a>
+        </li>
     {% else %}
-        <li role="presentation" class="{% if app.request.get('_route') == 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}"><i class="fa fa-home"></i> {% trans %}menu.home{% endtrans %}</a></li>
-        <li role="presentation" class="{% if app.request.get('_route') == 'fos_user_security_login' %}active{% endif %}"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {% trans %}menu.login{% endtrans %}</a></li>
-        <li role="presentation" class="{% if app.request.get('_route') starts with 'fos_user_registration' %}active{% endif %}"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus"></i> {% trans %}menu.signup{% endtrans %}</a></li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'homepage' %}active{% endif %}">
+            <a href="{{ path('homepage') }}"><i class="fa fa-home"></i> {% trans %}menu.home{% endtrans %}</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'fos_user_security_login' %}active{% endif %}">
+            <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {% trans %}menu.login{% endtrans %}</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') starts with 'fos_user_registration' %}active{% endif %}">
+            <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus"></i> {% trans %}menu.signup{% endtrans %}</a>
+        </li>
     {% endif %}
 </ul>

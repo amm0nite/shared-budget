@@ -144,11 +144,26 @@ class User extends BaseUser {
      */
     public function isInvited(Budget $budget) {
         foreach ($this->invitationsReceived as $i) {
-            if ($i->getAccepted() && $i->getBudget()->getId() == $budget->getId()) {
+            if ($i->getStatus() == 'accepted' && $i->getBudget()->getId() == $budget->getId()) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPendingInvitationsReceived() {
+        $result = array();
+
+        foreach ($this->invitationsReceived as $i) {
+            if ($i->getStatus() == 'pending') {
+                $result[] = $i;
+            }
+        }
+
+        return $result;
     }
 
     /**
