@@ -1,4 +1,2 @@
-{% if app.user.id == bill.user.id %}
-    <a href="{{ path('sb_bill_edit', { 'id': bill.id }) }}" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i> {% trans %}bill.edit{% endtrans %}</a>
-    <a href="{{ path('sb_bill_delete', { 'id': bill.id }) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> {% trans %}bill.delete{% endtrans %}</a>
-{% endif %}
+<a href="{{ path('sb_bill_edit', { 'id': bill.id }) }}" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i> {% trans %}bill.edit{% endtrans %}</a>
+<a href="{{ path('sb_bill_delete', { 'id': bill.id }) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> {% trans %}bill.delete{% endtrans %}</a>

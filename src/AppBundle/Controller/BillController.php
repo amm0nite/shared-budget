@@ -64,7 +64,7 @@ class BillController extends Controller {
      * @Route("/bill/{id}/edit", name="sb_bill_edit", requirements={"id": "\d+"})
      */
     public function editAction(Request $request, $id) {
-        $bill = $this->get('app.checker')->bill($this->getUser(), $id);
+        $bill = $this->get('app.checker')->bill($this->getUser(), $id, false);
         $budget = $bill->getBudget();
         $before = $bill->toArray();
 
@@ -92,7 +92,7 @@ class BillController extends Controller {
      * @Route("/bill/{id}/delete", name="sb_bill_delete", requirements={"id": "\d+"})
      */
     public function deleteAction(Request $request, $id) {
-        $bill = $this->get('app.checker')->bill($this->getUser(), $id);
+        $bill = $this->get('app.checker')->bill($this->getUser(), $id, false);
         $budget = $bill->getBudget();
 
         $action = Action::deleteBill($budget, $this->getUser(), $bill->toArray());

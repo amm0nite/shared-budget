@@ -13,7 +13,7 @@ class InvitationController extends Controller {
      * @Route("/budget/{budget_id}/invitation/new", name="sb_invitation_new", requirements={"budget_id": "\d+"})
      */
     public function newAction(Request $request, $budget_id) {
-        $budget = $this->get('app.checker')->budget($this->getUser(), $budget_id);
+        $budget = $this->get('app.checker')->budget($this->getUser(), $budget_id, false);
 
         $invitation = new Invitation();
         $invitation->setBudget($budget);
@@ -42,9 +42,10 @@ class InvitationController extends Controller {
      * @Route("/invitation/{id}/{action}", name="sb_invitation_update", requirements={"id": "\d+", "action": "cancel|renew"})
      */
     public function updateAction($id, $action) {
-        $invitation = $this->get('app.checker')->invitation($this->getUser(), $id);
+        $invitation = $this->get('app.checker')->invitation($this->getUser(), $id, false);
         $budget = $invitation->getBudget();
         $before = $invitation->toArray();
+        $target = $invitation->getTarget();
 
         $actionToStatus = array(
             'cancel' => 'canceled',
@@ -60,7 +61,13 @@ class InvitationController extends Controller {
         $em->flush();
 
         $this->addFlash('notice', $this->get('translator')->trans('invitation.updatesuccessful'));
-        return $this->redirectToRoute('sb_budget_show', array('id' => $budget->getId()));
+
+        if ($this->getUser()->getId() != $target->getId()) {
+            return $this->redirectToRoute('sb_budget_show', array('id' => $budget->getId()));
+        }
+        else {
+            return $this->redirectToRoute('sb_budgets');
+        }
     }
 
     /**
@@ -73,7 +80,7 @@ class InvitationController extends Controller {
 
         $actionToStatus = array(
             'accept' => 'accepted',
-            'renew' => 'refused'
+            'refuse' => 'refused'
         );
         $invitation->setStatus($actionToStatus[$action]);
 

@@ -18,8 +18,10 @@
                 <td class="{{ colorClass }}">{{ balance[invitation.target.id] }}</td>
                 <td>
                     {% if invitation.status != 'manager' %}
-                        {% if invitation.status not in ['canceled','declined'] %}
-                            <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'cancel' }) }}" class="btn btn-default btn-sm"><i class="fa fa-ban"></i> {% trans %}invitation.cancel{% endtrans %}</a>
+                        {% if invitation.status not in ['canceled','refused'] %}
+                            {% set word = 'invitation.cancel' %}
+                            {% if invitation.target.id == app.user.id %}{% set word = 'invitation.refuse' %}{% endif %}
+                            <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'cancel' }) }}" class="btn btn-default btn-sm"><i class="fa fa-ban"></i> {{ word|trans }}</a>
                         {% else %}
                             <a href="{{ path('sb_invitation_update', { 'id': invitation.id, 'action': 'renew' }) }}" class="btn btn-default btn-sm"><i class="fa fa-repeat"></i> {% trans %}invitation.renew{% endtrans %}</a>
                         {% endif %}
