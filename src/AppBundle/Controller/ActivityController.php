@@ -18,15 +18,16 @@ class ActivityController extends Controller {
     public function indexAction() {
         $user = $this->getUser();
         /* @var $user User */
-        $budgets = $user->getBudgets();
 
-        $em = $this->getDoctrine()->getManager();
-        $actions = $em
-            ->createQuery('SELECT a FROM AppBundle:Action a WHERE a.budget IN (:budgets) OR a.user = :user ORDER BY a.created DESC')
-            ->setParameter('budgets', $budgets)
-            ->setParameter('user', $user)
-            ->setMaxResults(10)
-            ->getResult();
+        $actions = $this->get('app.history')->getHistory($user);
+
+        if (count($actions) > 0) {
+            $user->setLastSeenAction($actions[0]);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
 
         return $this->render('activity/index.html.twig', array('actions' => $actions));
     }

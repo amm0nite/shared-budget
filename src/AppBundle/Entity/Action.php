@@ -61,6 +61,10 @@ class Action {
      */
     protected $updated;
 
+    public function getId() {
+        return $this->id;
+    }
+
     /**
      * @ORM\PrePersist
      */

@@ -71,6 +71,13 @@ class User extends BaseUser {
     protected $actions;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Action")
+     * @ORM\JoinColumn(name="last_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var Action
+     */
+    protected $lastSeenAction;
+
+    /**
      * User constructor.
      */
     public function __construct() {
@@ -97,6 +104,20 @@ class User extends BaseUser {
      */
     public function isPasswordLegal() {
         return $this->password != $this->username;
+    }
+
+    /**
+     * @param Action $action
+     */
+    public function setLastSeenAction(Action $action) {
+        $this->lastSeenAction = $action;
+    }
+
+    /**
+     * @return Action
+     */
+    public function getLastSeenAction() {
+        return $this->lastSeenAction;
     }
     
     /**

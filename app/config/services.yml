@@ -11,6 +11,10 @@ services:
         class: AppBundle\Checker
         arguments: ['@doctrine', '@translator.default']
 
+    app.history:
+        class: AppBundle\History
+        arguments: ['@doctrine']
+
     app.form.type.invitation:
         class: AppBundle\Form\Type\InvitationType
         arguments: ['@doctrine', '@translator.default']

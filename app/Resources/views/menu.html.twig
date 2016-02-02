@@ -1,7 +1,12 @@
 <ul class="nav nav-tabs">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_activity' %}active{% endif %}">
-            <a href="{{ path('sb_activity') }}"><i class="fa fa-bell"></i> {% trans %}menu.activity{% endtrans %}</a>
+            <a href="{{ path('sb_activity') }}">
+                <i class="fa fa-bell"></i>
+                {% trans %}menu.activity{% endtrans %}
+                {% set count = history.unseen(app.user) %}
+                {% if count > 0 %}<span class="badge">{{ count }}</span>{% endif %}
+            </a>
         </li>
         <li role="presentation" class="{% if app.request.get('_route') starts with 'sb_budget' %}active{% endif %}">
             <a href="{{ path('sb_budgets') }}">
