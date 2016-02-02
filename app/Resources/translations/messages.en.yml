@@ -89,6 +89,7 @@ action.budget.edit: "<strong>%username%</strong> has modified the budget <strong
 action.budget.delete: "<strong>%username%</strong> has deleted the budget <strong>%budgetname%</strong>"
 action.bill.new: "<strong>%username%</strong> has added a new bill to the budget <strong>%budgetname%</strong>"
 action.bill.delete: "<strong>%username%</strong> has deleted a bill in the budget <strong>%budgetname%</strong>"
+action.bill.copy: "A bill has been automatically copied in the budget <strong>%budgetname%</strong>"
 action.bill.detail: "<strong>%payer%</strong> paid <strong>%price%</strong> for <strong>%name%</strong>"
 action.bill.edit: "<strong>%username%</strong> has modified a bill in the budget <strong>%budgetname%</strong>"
 action.bill.addedguests: "Added : <strong>%guests%</strong>"

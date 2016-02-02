@@ -7,6 +7,7 @@
  */
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Action;
 use AppBundle\Entity\Bill;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -65,6 +66,9 @@ class CronController extends Controller
                     $bill->setDate($now);
                     $em->persist($bill);
                     $copies[] = $bill->toArray();
+
+                    $action = Action::copyBill($budget, $bill->toArray());
+                    $em->persist($action);
                 }
             }
         }

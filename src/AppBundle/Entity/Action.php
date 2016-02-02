@@ -218,6 +218,14 @@ class Action {
         return $action;
     }
 
+    public static function copyBill(Budget $budget, array $bill) {
+        $action = new Action();
+        $action->setTemplate('bill_copy');
+        $action->setBudget($budget);
+        $action->setData($bill);
+        return $action;
+    }
+
     public static function newBudget(Budget $budget, User $user, array $bud) {
         $action = new Action();
         $action->setTemplate('budget_new');
