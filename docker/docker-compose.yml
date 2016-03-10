@@ -1,0 +1,17 @@
+mysql:
+  image: mysql
+  container_name: shared-budget-mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: "root-password"
+    MYSQL_DATABASE: "budget"
+    MYSQL_USER: "budget"
+    MYSQL_PASSWORD: "budget-password"
+webapp:
+  image: php:5-apache
+  container_name: shared-budget-php
+  links:
+    - mysql
+  ports:
+    - "80:80"
+  volumes:
+    - ../web:/var/www/html
