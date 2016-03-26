@@ -1,6 +1,6 @@
 # Shared budget
 
-## Developpement
+## Development
 
 Get the code with `git clone git@github.com:amm0nite/shared-budget`.
 
