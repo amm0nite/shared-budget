@@ -7,11 +7,11 @@ mysql:
     MYSQL_USER: "budget"
     MYSQL_PASSWORD: "budget-password"
 webapp:
-  image: php:5-apache
+  image: shared-budget-php
   container_name: shared-budget-php
   links:
     - mysql
   ports:
     - "80:80"
   volumes:
-    - ../web:/var/www/html
+    - ../:/var/budget

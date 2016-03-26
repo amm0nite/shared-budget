@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t budget-app .
+docker build -t shared-budget-php .

@@ -9,7 +9,6 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-
 RUN bash -c "source /root/.nvm/nvm.sh && nvm install 5 && npm install -g bower"
 
 RUN a2dissite 000-default
