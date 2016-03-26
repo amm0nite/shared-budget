@@ -2,23 +2,36 @@
 
 ## Development
 
-Get the code with `git clone git@github.com:amm0nite/shared-budget`.
+Get the code with `git clone git@github.com:amm0nite/shared-budget`
 
-Build the container :
+Build the container
 
-```
+```bash
 cd docker/webapp/
 bash build.sh
 ```
 
-Launch containers with `docker-compose up`.
+Launch containers
 
-Install dependencies :
-
+```bash
+cd ..
+docker-compose up
 ```
+
+Go inside the container with `docker exec -it shared-budget-php bash`
+
+```bash
+# Install dependencies
 composer install
-bower install
+bower install --allow-root
+# Setup permissions
+chown -Rv www-data:www-data var/cache
+chown -Rv www-data:www-data var/logs
+# Create database schema
+php bin/console doctrine:schema:create
 ```
+
+Edit `web/app_dev.php` to remove access restrictions
 
 ## Installation
 
@@ -26,7 +39,7 @@ On a new Debian or Ubuntu install,
 
 Clone in `$HOME/budget`
 
-```
+```bash
 cd $HOME
 mkdir budget
 cd budget
@@ -47,14 +60,14 @@ Install composer and do `composer install`
 
 Setup the database schema :
 
-```
+```bash
 php bin/console doctrine:schema:update --dump-sql
 php bin/console doctrine:schema:update --force
 ```
 
 Change permissions :
 
-```
+```bash
 chown -Rv www-data:www-data var/cache
 chown -Rv www-data:www-data var/logs
 ```
