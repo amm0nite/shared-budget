@@ -1,5 +1,25 @@
 # Shared budget
 
+## Developpement
+
+Get the code with `git clone git@github.com:amm0nite/shared-budget`.
+
+Build the container :
+
+```
+cd docker/webapp/
+bash build.sh
+```
+
+Launch containers with `docker-compose up`.
+
+Install dependencies :
+
+```
+composer install
+bower install
+```
+
 ## Installation
 
 On a new Debian or Ubuntu install,
@@ -34,9 +54,10 @@ php bin/console doctrine:schema:update --force
 
 Change permissions :
 
-`chown -Rv www-data:www-data var/cache`
-`chown -Rv www-data:www-data var/logs`
-
+```
+chown -Rv www-data:www-data var/cache
+chown -Rv www-data:www-data var/logs
+```
 
 Install nodejs for npm 
 
