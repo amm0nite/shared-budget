@@ -15,6 +15,5 @@
 /vendor/
 /web/bundles/
 /web/assets/vendor/
-/nbproject/
 /.idea/
-composer.phar
+/web/app_dev.php
