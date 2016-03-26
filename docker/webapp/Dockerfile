@@ -5,7 +5,7 @@ ENV TERM xterm
 
 RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y \
   build-essential libssl-dev git curl wget nano \
-  apache2 mysql-client php5 php5-mcrypt php5-mysql
+  apache2 mysql-client php5 php5-mcrypt php5-mysql php5-xdebug
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
