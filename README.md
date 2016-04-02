@@ -14,11 +14,11 @@ bash build.sh
 Launch containers
 
 ```bash
-cd ..
-docker-compose up
+cd docker/
+docker-compose start
 ```
 
-Go inside the container with `docker exec -it shared-budget-php bash`
+Go inside the container with `docker exec -it php-shared-budget bash`
 
 ```bash
 # Install dependencies
