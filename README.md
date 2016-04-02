@@ -15,7 +15,7 @@ Launch containers
 
 ```bash
 cd docker/
-docker-compose start
+docker-compose up
 ```
 
 Go inside the container with `docker exec -it php-shared-budget bash`
