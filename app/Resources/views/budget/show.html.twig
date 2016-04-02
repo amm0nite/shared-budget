@@ -3,24 +3,33 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-8">
-            <h2>{{ budget.name }}</h2>
+        <div class="col-md-10">
+            <p><strong>{{ budget.name }}</strong></p>
             <p>{{ budget.description }}</p>
         </div>
-        <div class="col-md-4 text-right">
+        <div class="col-md-2">
             {{ include('budget/buttons.html.twig', { 'budget': budget }) }}
         </div>
     </div>
 
+    <div style="height:10px;"></div>
+
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ path('sb_bill_new', { 'budget_id': budget.id }) }}" class="btn btn-default"><i class="fa fa-plus"></i> {% trans %}bill.new{% endtrans %}</a>
-            <a href="{{ path('sb_invitation_new', { 'budget_id': budget.id }) }}" class="btn btn-default"><i class="fa fa-user-plus"></i> {% trans %}invitation.new{% endtrans %}</a>
             <a href="{{ path('sb_budget_repay', { 'id': budget.id }) }}" class="btn btn-default"><i class="fa fa-balance-scale"></i> {% trans %}repay.show{% endtrans %}</a>
         </div>
     </div>
 
-    <div style="height:20px;"></div>
+    <div style="height:10px;"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('sb_invitation_new', { 'budget_id': budget.id }) }}" class="btn btn-default"><i class="fa fa-user-plus"></i> {% trans %}invitation.new{% endtrans %}</a>
+            <a href="{{ path('sb_bill_new', { 'budget_id': budget.id }) }}" class="btn btn-default"><i class="fa fa-plus"></i> {% trans %}bill.new{% endtrans %}</a>
+        </div>
+    </div>
+
+    <div style="height:10px;"></div>
 
     {{ include('invitation/index.html.twig', { 'budget': budget, 'invitations': budget.invitations, 'balance': budget.balance }) }}
 

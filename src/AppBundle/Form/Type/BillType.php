@@ -24,7 +24,7 @@ class BillType extends AbstractType {
         $builder
             ->add('name', TextType::class, array('label' => 'bill.name'))
             ->add('description', TextareaType::class, array('label' => 'bill.description', 'required' => false))
-            ->add('date', DateTimeType::class, array('label' => 'bill.date'))
+            //->add('date', DateTimeType::class, array('label' => 'bill.date'))
             ->add('price', MoneyType::class, array('label' => 'bill.price'))
             ->add('payer', EntityType::class, array(
                 'label' => 'bill.payer',
@@ -42,8 +42,8 @@ class BillType extends AbstractType {
                 'multiple' => true,
                 'expanded' => true
             ))
-            ->add('monthly', CheckboxType::class, array('label' => 'bill.monthly', 'required' => false))
-            ->add('save', SubmitType::class, array('label' => 'bill.save'));
+            ->add('save', SubmitType::class, array('label' => 'bill.save'))
+            ->add('monthly', CheckboxType::class, array('label' => 'bill.monthly', 'required' => false));
     }
 
     public function configureOptions(OptionsResolver $resolver) {

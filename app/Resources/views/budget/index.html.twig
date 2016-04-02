@@ -19,7 +19,6 @@
             <thead>
                 <tr>
                     <th>{% trans %}budget.name{% endtrans %}</th>
-                    <th>{% trans %}budget.bills{% endtrans %}</th>
                     <th>{% trans %}budget.actions{% endtrans %}</th>
                 </tr>
             </thead>
@@ -27,7 +26,6 @@
                 {% for budget in budgets %}
                     <tr>
                         <td><a href="{{ path('sb_budget_show', { 'id': budget.id }) }}" data-toggle="tooltip" data-placement="right" title="{{ budget.description }}">{{ budget.name }}</a></td>
-                        <td>{{ budget.bills|length }}</td>
                         <td>{{ include('budget/buttons.html.twig', { 'budget': budget }) }}</td>
                     </tr>
                 {% endfor %}
