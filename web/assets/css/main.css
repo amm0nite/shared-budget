@@ -5,6 +5,9 @@
 body {
 
 }
+#sb-navbar {
+    padding-top:10px;
+}
 #sb-content {
     padding-left:5px;
     padding-right:5px;
