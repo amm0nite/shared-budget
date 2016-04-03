@@ -7,7 +7,7 @@ Get the code with `git clone git@github.com:amm0nite/shared-budget`
 Build the container
 
 ```bash
-cd docker/webapp/
+cd docker/php-shared-budget/
 bash build.sh
 ```
 
