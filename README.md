@@ -72,9 +72,9 @@ chown -Rv www-data:www-data var/cache
 chown -Rv www-data:www-data var/logs
 ```
 
-Install nodejs for npm 
+Install nodejs to get npm
 
-Install bower golbally `npm install -g bower`
+Install bower `npm install -g bower`
 
 Install frontend dependencies with bower `bower install`
 
