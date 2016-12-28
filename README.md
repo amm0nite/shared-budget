@@ -43,7 +43,7 @@ Clone in `$HOME/budget`
 cd $HOME
 mkdir budget
 cd budget
-git clone git@github.com:amm0nite/shared-budget.git .
+git clone https://github.com/amm0nite/shared-budget.git .
 ```
 
 Install the required packages 
