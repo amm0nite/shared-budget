@@ -49,7 +49,7 @@ git clone https://github.com/amm0nite/shared-budget.git .
 Install the required packages 
 ```bash
 apt-get install apache2
-apt-get install	php php-mysql
+apt-get install	php php-mysql php-xml
 apt-get install libapache2-mod-php
 apt-get install	mysql-server mysql-client
 ```
