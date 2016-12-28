@@ -50,6 +50,7 @@ Install the required packages
 ```bash
 apt-get install apache2
 apt-get install	php php-mysql
+apt-get install libapache2-mod-php
 apt-get install	mysql-server mysql-client
 ```
 
