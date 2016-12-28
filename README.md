@@ -46,7 +46,12 @@ cd budget
 git clone git@github.com:amm0nite/shared-budget.git .
 ```
 
-Install packages `apt-get install apache2 php5 php5-mysql mysql-server mysql-client`
+Install the required packages 
+```bash
+apt-get install apache2
+apt-get install	php php-mysql
+apt-get install	mysql-server mysql-client
+```
 
 Create database and its user :
 
