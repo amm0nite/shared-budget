@@ -1,3 +1,5 @@
+![PHP Powered](http://php.net/images/logos/php-power-micro2.png "PHP Powered")
+
 # Shared budget
 
 ## Development
