@@ -6,12 +6,10 @@
 
 Get the code with `git clone git@github.com:amm0nite/shared-budget`
 
-Build the container
-
-```bash
-cd docker/php-shared-budget/
-bash build.sh
-```
+Requirements
+ - Docker + docker-compose
+ - php7 + composer
+ - node + npm
 
 Launch containers
 
@@ -20,20 +18,23 @@ cd docker/
 docker-compose up
 ```
 
-Go inside the container with `docker exec -it php-shared-budget bash`
+Install dependencies
 
 ```bash
-# Install dependencies
 composer install
-bower install --allow-root
-# Setup permissions
-chown -Rv www-data:www-data var/cache
-chown -Rv www-data:www-data var/logs
-# Create database schema
+npm install
+```
+
+Create the database schema
+
+```bash
 php bin/console doctrine:schema:create
 ```
 
-Edit `web/app_dev.php` to remove access restrictions
+Start the built-in web server
+```bash
+php bin/console server:start
+```
 
 ## Installation
 
@@ -105,6 +106,8 @@ Create virtualhost `budget.conf` in `/etc/apache2/sites-available`:
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+
+(See https://symfony.com/doc/current/setup/web_server_configuration.html)
 
 Enable the apache2 mod rewrite `a2enmod rewrite`
 
