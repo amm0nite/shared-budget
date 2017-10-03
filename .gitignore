@@ -16,3 +16,6 @@
 /web/bundles/
 /web/assets/vendor/
 /.idea/
+
+/docker/data
+composer.phar

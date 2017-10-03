@@ -1,8 +1,12 @@
 mysql:
-  image: mysql
-  container_name: mysql-shared-budget
+  image: mysql:5
+  container_name: mysql-budget
   environment:
     MYSQL_ROOT_PASSWORD: "root-password"
     MYSQL_DATABASE: "budget"
     MYSQL_USER: "budget"
     MYSQL_PASSWORD: "budget-password"
+  volumes:
+    - ./data/mysql:/var/lib/mysql
+  ports:
+    - "3306:3306"
