@@ -83,9 +83,11 @@ chown -Rv www-data:www-data var/logs
 
 Install nodejs to get npm
 
-Install bower `npm install -g bower`
+Install frontend dependencies
 
-Install frontend dependencies with bower `bower install`
+```
+npm install
+```
 
 Create virtualhost `budget.conf` in `/etc/apache2/sites-available`:
 

@@ -1,0 +1,29 @@
+{
+  "name": "shared-budget",
+  "version": "1.0.0",
+  "description": "Shared budget web app",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./copy-assets.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amm0nite/shared-budget.git"
+  },
+  "author": "",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/amm0nite/shared-budget/issues"
+  },
+  "homepage": "https://github.com/amm0nite/shared-budget#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "moment": "^2.18.1"
+  }
+}
