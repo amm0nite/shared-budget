@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Budget {
     /**
+     * @var integer
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,6 +21,8 @@ class Budget {
     protected $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank()
      * @Assert\Length(min=3, max=64)
@@ -26,36 +30,50 @@ class Budget {
     protected $name;
     
     /**
+     * @var string
+     *
      * @ORM\Column(type="text", nullable=TRUE)
      */
     protected $description;
     
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $created;
     
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $updated;
     
     /**
+     * @var array|Bill[]
+     *
      * @ORM\OneToMany(targetEntity="Bill", mappedBy="budget")
      */
     protected $bills;
 
     /**
+     * @var array|Invitation[]
+     *
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="budget")
      */
     protected $invitations;
 
     /**
+     * @var array|Action[]
+     *
      * @ORM\OneToMany(targetEntity="Action", mappedBy="budget")
      */
     protected $actions;
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="budgets")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */

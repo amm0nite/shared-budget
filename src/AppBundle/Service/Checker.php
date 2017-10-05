@@ -1,11 +1,14 @@
 <?php
 namespace AppBundle\Service;
 
+use AppBundle\Entity\User;
+use AppBundle\Entity\Bill;
+use AppBundle\Entity\Budget;
+use AppBundle\Entity\Invitation;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Translation\Translator;
-use AppBundle\Entity\User;
 
 class Checker {
     /**
@@ -32,15 +35,16 @@ class Checker {
      * @param User $user
      * @param $id
      * @param bool $requireOwnership
-     * @return Entity\Budget
+     * @return Budget
      */
     public function budget(User $user, $id, $requireOwnership = true) {
         $repo = $this->registry->getRepository('AppBundle:Budget');
-        $budget = $repo->find($id);
 
+        $budget = $repo->find($id);
         if (!$budget) {
             throw new NotFoundHttpException($this->translator->trans('budget.notfound'));
         }
+        /* @var $budget Budget */
 
         if ($budget->getUser()->getId() != $user->getId()) {
             if ($requireOwnership) {
@@ -58,15 +62,16 @@ class Checker {
      * @param User $user
      * @param $id
      * @param bool $requireOwnership
-     * @return Entity\Bill
+     * @return Bill
      */
     public function bill(User $user, $id, $requireOwnership = true) {
         $repo = $this->registry->getRepository('AppBundle:Bill');
-        $bill = $repo->find($id);
 
+        $bill = $repo->find($id);
         if (!$bill) {
             throw new NotFoundHttpException($this->translator->trans('bill.notfound'));
         }
+        /* @var $bill Bill */
 
         $budget = $bill->getBudget();
         if (!$budget) {
@@ -89,15 +94,16 @@ class Checker {
      * @param User $user
      * @param $id
      * @param bool $requireOwnership
-     * @return Entity\Invitation
+     * @return Invitation
      */
     public function invitation(User $user, $id, $requireOwnership = true) {
         $repo = $this->registry->getRepository('AppBundle:Invitation');
-        $invitation = $repo->find($id);
 
+        $invitation = $repo->find($id);
         if (!$invitation) {
             throw new NotFoundHttpException($this->translator->trans('invitation.notfound'));
         }
+        /* @var $invitation Invitation */
 
         $budget = $invitation->getBudget();
         if (!$budget) {

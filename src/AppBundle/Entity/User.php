@@ -90,7 +90,15 @@ class User extends BaseUser {
         $this->budgets = new ArrayCollection();
         $this->actions = new ArrayCollection();
     }
-    
+
+    /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @Assert\IsFalse(message = "That name is reserved")
      */
