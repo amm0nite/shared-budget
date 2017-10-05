@@ -5,6 +5,7 @@
         <tr>
             <th>{% trans %}bill.name{% endtrans %}</th>
             <th>{% trans %}bill.price{% endtrans %}</th>
+            <th>{% trans %}bill.owner{% endtrans %}</th>
             <th>{% trans %}bill.date{% endtrans %}</th>
             <th>{% trans %}bill.actions{% endtrans %}</th>
         </tr>
@@ -14,6 +15,7 @@
             <tr>
                 <td>{{ bill.name }}</td>
                 <td>{{ bill.price }}</td>
+                <td>{{ bill.user }}</td>
                 <td>{{ bill.date|date('datetime'|trans) }}</td>
                 <td>{{ include('bill/buttons.html.twig', { 'bill': bill }) }}</td>
             </tr>
