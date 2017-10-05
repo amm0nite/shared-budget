@@ -8,11 +8,11 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.checker:
-        class: AppBundle\Checker
+        class: AppBundle\Service\Checker
         arguments: ['@doctrine', '@translator.default']
 
     app.history:
-        class: AppBundle\History
+        class: AppBundle\Service\History
         arguments: ['@doctrine']
 
     app.form.type.invitation:

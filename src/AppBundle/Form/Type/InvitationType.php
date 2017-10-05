@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pierre
- * Date: 21/01/16
- * Time: 16:47
- */
 namespace AppBundle\Form\Type;
 
 use AppBundle\Form\DataTransformer\UserToStringTransformer;
@@ -29,6 +23,7 @@ class InvitationType extends AbstractType {
     /**
      * InvitationType constructor.
      * @param Registry $registry
+     * @param Translator $translator
      */
     public function __construct(Registry $registry, Translator $translator) {
         $this->registry = $registry;

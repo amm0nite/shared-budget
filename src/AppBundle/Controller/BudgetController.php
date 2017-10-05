@@ -13,8 +13,10 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Form\Type\BudgetType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Action;
+use Symfony\Component\HttpFoundation\Response;
 
 class BudgetController extends Controller {
     /**
@@ -30,6 +32,9 @@ class BudgetController extends Controller {
 
     /**
      * @Route("/budget/new", name="sb_budget_new")
+     *
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request) {
         $budget = new Budget();
@@ -63,6 +68,10 @@ class BudgetController extends Controller {
 
     /**
      * @Route("/budget/{id}/edit", name="sb_budget_edit", requirements={"id": "\d+"})
+     *
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, $id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id);
@@ -88,6 +97,10 @@ class BudgetController extends Controller {
 
     /**
      * @Route("/budget/{id}/delete", name="sb_budget_delete", requirements={"id": "\d+"})
+     *
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse|Response
      */
     public function deleteAction(Request $request, $id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id);
@@ -110,6 +123,9 @@ class BudgetController extends Controller {
 
     /**
      * @Route("/budget/{id}", name="sb_budget_show", requirements={"id": "\d+"})
+     *
+     * @param $id
+     * @return Response
      */
     public function showAction($id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id, false);
@@ -125,6 +141,9 @@ class BudgetController extends Controller {
 
     /**
      * @Route("/budget/{id}/repay", name="sb_budget_repay", requirements={"id": "\d+"})
+     *
+     * @param $id
+     * @return Response
      */
     public function repayAction($id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $id, false);

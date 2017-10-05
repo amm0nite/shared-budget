@@ -1,11 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pierre
- * Date: 21/01/16
- * Time: 18:36
- */
-namespace AppBundle;
+namespace AppBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

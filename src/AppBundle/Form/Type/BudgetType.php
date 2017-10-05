@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pierre
- * Date: 21/01/16
- * Time: 16:47
- */
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;

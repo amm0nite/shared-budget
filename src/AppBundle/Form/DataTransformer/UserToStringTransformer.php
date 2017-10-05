@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pierre
- * Date: 22/01/16
- * Time: 14:32
- */
 namespace AppBundle\Form\DataTransformer;
 
 use AppBundle\Entity\User;
@@ -35,7 +29,7 @@ class UserToStringTransformer implements DataTransformerInterface {
     }
 
     /**
-     * @param mixed $value The value in the original representation
+     * @param mixed $user The value in the original representation
      * @return mixed The value in the transformed representation
      * @throws TransformationFailedException When the transformation fails.
      */
@@ -49,7 +43,7 @@ class UserToStringTransformer implements DataTransformerInterface {
     }
 
     /**
-     * @param mixed $value The value in the transformed representation
+     * @param mixed $username The value in the transformed representation
      * @return mixed The value in the original representation
      * @throws TransformationFailedException When the transformation fails.
      */

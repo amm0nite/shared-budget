@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pierre
- * Date: 26/01/16
- * Time: 16:39
- */
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Action;
@@ -25,13 +19,13 @@ class CronController extends Controller
 
         // find monthly bill names
         $em = $this->getDoctrine()->getManager();
-        $montlhies = $em
+        $monthlies = $em
             ->createQuery('SELECT DISTINCT bi.name, bu.id as budget_id FROM AppBundle:Bill bi JOIN bi.budget bu WHERE bi.monthly=TRUE ORDER BY bi.id DESC')
             ->getResult();
 
         // put in array indexed by budget id
         $budgetIndexed = array();
-        foreach ($montlhies as $montlhy) {
+        foreach ($monthlies as $montlhy) {
             $budgetId = $montlhy['budget_id'];
 
             if (!in_array($budgetId, array_keys($budgetIndexed))) {

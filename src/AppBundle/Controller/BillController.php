@@ -3,6 +3,8 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Bill;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\BillType;
@@ -17,6 +19,10 @@ class BillController extends Controller {
     
     /**
      * @Route("/budget/{budget_id}/bill/new", name="sb_bill_new", requirements={"budget_id": "\d+"})
+     *
+     * @param Request $request
+     * @param $budget_id
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request, $budget_id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $budget_id, false);
@@ -62,6 +68,10 @@ class BillController extends Controller {
 
     /**
      * @Route("/bill/{id}/edit", name="sb_bill_edit", requirements={"id": "\d+"})
+     *
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, $id) {
         $bill = $this->get('app.checker')->bill($this->getUser(), $id, false);
@@ -90,6 +100,10 @@ class BillController extends Controller {
 
     /**
      * @Route("/bill/{id}/delete", name="sb_bill_delete", requirements={"id": "\d+"})
+     *
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id) {
         $bill = $this->get('app.checker')->bill($this->getUser(), $id, false);

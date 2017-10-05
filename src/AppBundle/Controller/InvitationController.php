@@ -4,13 +4,19 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Invitation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\InvitationType;
 use AppBundle\Entity\Action;
+use Symfony\Component\HttpFoundation\Response;
 
 class InvitationController extends Controller {
     /**
      * @Route("/budget/{budget_id}/invitation/new", name="sb_invitation_new", requirements={"budget_id": "\d+"})
+     *
+     * @param Request $request
+     * @param $budget_id
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request, $budget_id) {
         $budget = $this->get('app.checker')->budget($this->getUser(), $budget_id, false);
@@ -40,6 +46,10 @@ class InvitationController extends Controller {
 
     /**
      * @Route("/invitation/{id}/{action}", name="sb_invitation_update", requirements={"id": "\d+", "action": "cancel|renew"})
+     *
+     * @param $id
+     * @param $action
+     * @return RedirectResponse
      */
     public function updateAction($id, $action) {
         $invitation = $this->get('app.checker')->invitation($this->getUser(), $id, false);
@@ -72,6 +82,10 @@ class InvitationController extends Controller {
 
     /**
      * @Route("/invitation/{id}/{action}", name="sb_invitation_answer", requirements={"id": "\d+", "action": "accept|refuse"})
+     *
+     * @param $id
+     * @param $action
+     * @return RedirectResponse
      */
     public function answerAction($id, $action) {
         $invitation = $this->get('app.checker')->invitation($this->getUser(), $id, false);
