@@ -10,11 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\BillType;
 use AppBundle\Entity\Action;
 
-/**
- * Description of BillController
- *
- * @author pierre
- */
 class BillController extends Controller {
     
     /**
@@ -29,6 +24,7 @@ class BillController extends Controller {
 
         $bill = new Bill();
         $bill->setBudget($budget);
+        $bill->setPayer($this->getUser());
 
         if (!$bill->getDate()) {
             $bill->setDate(new \DateTime());

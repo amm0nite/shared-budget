@@ -13,6 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Invitation {
     /**
+     * @var integer
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -20,6 +22,8 @@ class Invitation {
     protected $id;
 
     /**
+     * @var Budget
+     *
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="invitations")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="CASCADE")
      * @var Budget $budget
@@ -27,18 +31,24 @@ class Invitation {
     protected $budget;
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="invitationsSent")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $user;
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="invitationsReceived")
      * @ORM\JoinColumn(name="target_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $target;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank()
      * @Assert\Length(min=3, max=64)
@@ -46,11 +56,15 @@ class Invitation {
     protected $status;
     
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $created;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $updated;
@@ -59,14 +73,23 @@ class Invitation {
         $this->status = 'pending';
     }
 
+    /**
+     * @return integer
+     */
     public function getId() {
         return $this->id;
     }
 
+    /**
+     * @param string $status
+     */
     public function setStatus($status) {
         $this->status = $status;
     }
 
+    /**
+     * @return string
+     */
     public function getStatus() {
         return $this->status;
     }

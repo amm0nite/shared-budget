@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Bill
 {
     /**
+     * @var integer
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -20,6 +22,8 @@ class Bill
     protected $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank()
      * @Assert\Length(max=64)
@@ -27,49 +31,67 @@ class Bill
     protected $name;
 
     /**
+     * @var double
+     *
      * @ORM\Column(type="decimal", scale=2)
      * @Assert\NotBlank()
      */
     protected $price;
     
     /**
+     * @var string
+     *
      * @ORM\Column(type="text", nullable=TRUE)
      */
     protected $description;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime")
      */
     protected $date;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(type="boolean")
      */
     protected $monthly;
     
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $created;
     
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $updated;
     
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="bills")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $user;
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="payments")
      * @ORM\JoinColumn(name="payer_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $payer;
 
     /**
+     * @var array|User[]
+     *
      * @ORM\ManyToMany(targetEntity="User", inversedBy="paidBills")
      * @ORM\JoinTable(name="sb_guest")
      */
@@ -77,6 +99,8 @@ class Bill
 
 
     /**
+     * @var Budget
+     *
      * @ORM\ManyToOne(targetEntity="Budget", inversedBy="bills")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="CASCADE")
      */
