@@ -1,0 +1,33 @@
+[
+    {
+        "name": "begin",
+        "params": {
+            "host": "front",
+            "name": "Budget",
+            "owner": "www-data"
+        }
+    },
+    {
+        "name": "rsync",
+        "params": {
+            "exclude": [
+                ".git",
+                ".gitignore",
+                "/var",
+                "/docker",
+                "/node_modules",
+                "/vendor"
+            ]
+        }
+    },
+    {
+        "name": "vhost",
+        "params": {
+            "hostname": "budget.ahst.fr",
+            "php": true
+        }
+    },
+    {
+        "name": "end"
+    }
+]
