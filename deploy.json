@@ -15,8 +15,7 @@
                 ".gitignore",
                 "/var",
                 "/docker",
-                "/node_modules",
-                "/vendor"
+                "/node_modules"
             ]
         }
     },
