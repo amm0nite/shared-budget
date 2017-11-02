@@ -13,6 +13,7 @@
             "exclude": [
                 ".git",
                 ".gitignore",
+                "./idea",
                 "/var",
                 "/docker",
                 "/node_modules"
