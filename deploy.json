@@ -14,12 +14,21 @@
                 ".git",
                 ".gitignore",
                 "/.idea",
-                "/var",
-                "/docker",
+                "/var/cache",
+                "/var/logs",
+                "/var/sessions",
+                "/var/*.cache",
                 "/node_modules",
+                "/docker",
                 "/vendor"
             ]
         }
+    },
+    {
+        "name": "composerInstall"
+    },
+    {
+        "name": "npmInstall"
     },
     {
         "name": "vhost",
