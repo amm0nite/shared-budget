@@ -19,4 +19,7 @@ WORKDIR /var/www/budget/
 RUN composer install
 RUN npm install --unsafe-perm
 
+COPY budget.conf /etc/apache2/sites-available
+RUN a2ensite budget.conf
+
 CMD ["apache2ctl", "-DFOREGROUND"]
