@@ -21,5 +21,9 @@ RUN npm install --unsafe-perm
 
 COPY budget.conf /etc/apache2/sites-available
 RUN a2ensite budget.conf
+RUN a2dissite 000-default.conf
+
+RUN chown -Rv www-data:www-data var/cache
+RUN chown -Rv www-data:www-data var/logs
 
 CMD ["apache2ctl", "-DFOREGROUND"]
