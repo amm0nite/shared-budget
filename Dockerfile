@@ -13,13 +13,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update && apt-get install -y nodejs
 
+COPY /  /var/www/budget/
 WORKDIR /var/www/budget/
 
-COPY * ./
-
 RUN composer install
-RUN npm install
-
-RUN chown -Rv www-data:www-data .
+RUN npm install --unsafe-perm
 
 CMD ["apache2ctl", "-DFOREGROUND"]
