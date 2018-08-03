@@ -114,3 +114,9 @@ Create virtualhost `budget.conf` in `/etc/apache2/sites-available`:
 Enable the apache2 mod rewrite `a2enmod rewrite`
 
 Restart apache2 `service apache2 restart`
+
+## Docker
+
+```bash
+docker pull amm0nite/shared-budget
+```
