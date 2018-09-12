@@ -133,7 +133,8 @@ class BudgetController extends Controller {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Bill');
         $bills = $repo->findBy(
             array('budget' => $budget),
-            array('date' => 'DESC')
+            array('date' => 'DESC'),
+            100
         );
 
         return $this->render('budget/show.html.twig', array('budget' => $budget, 'bills' => $bills));
